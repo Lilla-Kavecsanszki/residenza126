@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <video autoplay muted loop id="hero-video">
+        <source src="{% static 'media/hero_video.mp4' %}" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    <div class="hero-content text-center text-white">
+        <h1>Building Oristano</h1>
+        <p>Your captivating introduction here.</p>
+    </div>
+</section>
+
+<!-- Property Listings Section -->
+<section class="property-listings py-5">
+    <h2 class="text-center mb-4">Property Listings</h2>
+    <div class="carousel">
+        <div class="frames">
+            <div class="frame_items">
+                {% for property in property_list %}
+                <div class="property">
+                    <img src="{{ property.image_url }}" alt="{{ property.name }}" class="img-fluid">
+                    <div class="property-details bg-light p-3">
+                        <h3 class="text-center">{{ property.name }}</h3>
+                        <p class="text-center">{{ property.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services/Features Section -->
+<section class="services py-5">
+    <h2 class="text-center mb-4">Our Services</h2>
+    <div class="row justify-content-center">
+        <div class="col-lg-4 mb-4">
+            <div class="service text-center p-4">
+                <i class="fas fa-home fa-3x mb-3"></i>
+                <div class="service-description">Service 1 Description</div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="service text-center p-4">
+                <i class="fas fa-building fa-3x mb-3"></i>
+                <div class="service-description">Service 2 Description</div>
+            </div>
+        </div>
+        <!-- Add more services here if needed -->
+    </div>
+</section>
+{% endblock %}

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Django App{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% templates 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Italiana&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="{% 'favicon.ico' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <script src="https://kit.fontawesome.com/b4a11e6ad7.js" crossorigin="anonymous"></script>
     
     {% block extra_styles %}{% endblock %}
@@ -22,7 +24,7 @@
             <div class="col-lg-6 d-flex justify-content-start align-items-center">
                 <!-- Logo -->
                 <a href="{% url 'home' %}" class="nav-link main-logo-link logo">
-                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-image">
+                    <img src="{% static 'media/logo.png' %}" alt="Logo" class="logo-image">
                 </a>
             </div>
             <div class="col-lg-6 d-flex justify-content-end">
@@ -50,11 +52,11 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                                <a href="{% url 'product_management' %}" class="dropdown-item" id="product-management" style="display: none;">Product Management</a>
-                                <a href="{% url 'profile' %}" class="dropdown-item" id="profile-link">My Profile</a>
-                                <a href="{% url 'logout' %}" class="dropdown-item" id="logout-link" style="display: none;">Logout</a>
-                                <a href="{% url 'register' %}" class="dropdown-item" id="register-link">Register</a>
-                                <a href="{% url 'login' %}" class="dropdown-item" id="login-link">Login</a>
+                                <a href="#" class="dropdown-item" id="product-management" style="display: none;">Property Management</a>
+                                <a href="#" class="dropdown-item" id="profile-link">My Profile</a>
+                                <a href="#" class="dropdown-item" id="logout-link" style="display: none;">Logout</a>
+                                <a href="#" class="dropdown-item" id="register-link">Register</a>
+                                <a href="#" class="dropdown-item" id="login-link">Login</a>
                             </div>
                         </li>
                     </ul>
@@ -92,22 +94,16 @@
                             <a class="nav-link" href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'properties' %}">Properties</a>
+                            <a class="nav-link" href="#">Properties</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'construction' %}">Construction</a>
+                            <a class="nav-link" href="#">Construction</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'rent' %}">Rent</a>
+                            <a class="nav-link" href="#">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Our Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                            <a class="nav-link" href="#">Contact</a>
                         </li>
                     </ul>
                 </div>
