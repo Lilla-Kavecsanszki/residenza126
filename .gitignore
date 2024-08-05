@@ -10,8 +10,8 @@ venv/
 # Django
 db.sqlite3
 *.log
-media/
-staticfiles/
+# media/
+# staticfiles/
 
 # VS Code
 .vscode/
