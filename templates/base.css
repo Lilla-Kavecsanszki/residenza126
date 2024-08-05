@@ -1,0 +1,398 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body {
+    font-family: "Cormorant Garamond", serif;
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+    color: #ffff;
+}
+
+/* Header styles */
+header {
+    background-color: rgba(255, 255, 255, 0.6);
+    font-family: "Playfair Display", serif;
+    color: #051c2c;
+    padding: 0.3em;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-background {
+    padding: 10px 0;
+}
+
+.main-logo-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.logo-font {
+    font-size: 2rem;
+    white-space: nowrap;
+    color: #051c2c;
+}
+
+.logo {
+    position: absolute; /* Position the logo absolutely */
+    margin-top: 20%;
+    z-index: 10000; /* Ensure the logo is above the navbar */
+}
+
+.logo-image {
+    max-height: 250px; 
+}
+
+
+.form-control {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#user-name {
+    color: #051c2c
+}
+
+#language-options {
+    color: #051c2c;
+}
+
+.navbar-nav a {
+    color: #051c2c;
+    text-decoration: none;
+    font-size: large;
+}
+
+.icon {
+    display: inline-block;
+    color: #051c2c;
+}
+
+@media (max-width: 992px) {
+    .d-lg-flex {
+        display: block !important;
+    }
+
+    .d-none.d-lg-flex {
+        display: none !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo-font {
+        font-size: 1.5rem;
+    }
+}
+  
+/* Hero section styles */
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero #hero-video {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.hero .hero-content {
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin: 0;
+    font-family: "Cinzel", serif;
+}
+
+.hero p {
+    font-size: 1.5em;
+}
+
+/* Main content styles */
+main {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+.hero p {
+    font-size: 1.5em;
+}
+
+/* Property listings styles */
+.property-listings {
+    border-radius: 10px;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.property-listings h2 {
+    color: #051c2c;
+    font-family: "Italiana", sans-serif;
+    text-transform: uppercase; 
+    margin-bottom: 1em;
+}
+
+/* Carousel */
+    
+@keyframes slides {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.frames {
+    overflow: hidden;
+    padding: 30px 0;
+    white-space: nowrap;
+    position: relative;
+}
+
+.frames:before, .frames:after {
+    position: absolute;
+    top: 0;
+    content: '';
+    width: 250px;
+    height: 100%;
+    z-index: 2;
+}
+
+.frames:before {
+    left: 0;
+    background: linear-gradient(to left, rgba(255,255,255,0), rgb(255, 255, 255));
+}
+
+.frames:after {
+    right: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgb(255, 255, 255));
+}
+
+.frame_items {
+    display: inline-block;
+    animation: 10s slides infinite linear;
+}
+
+.frames:hover .frame_items {
+    animation-play-state: paused;
+}
+
+.property {
+    display: inline-block;
+    font-family: "Cormorant Garamond", serif;
+    height: 300px; /* Adjust height for landscape orientation */
+    width: 500px; /* Adjust as needed */
+    margin: 1em;
+    background-color: #051c2c;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(5, 28, 44, .1);
+    transition: transform 0.2s;
+}
+
+.property:hover {
+    transform: scale(1.04);
+}
+
+.property img {
+    width: 100%;
+    height: auto;
+}
+
+.property-details {
+    padding: 1em;
+    text-align: center;
+}
+
+.property h3 {
+    background-color: #051c2c;
+    font-family: "Italiana", sans-serif;
+    color: white;
+    margin: 0;
+    padding: 1em;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.property p {
+    padding: 1em 1em 1em;
+    color: #051c2c;
+}
+
+/* Services/Features section styles */
+.services {
+    background-color: #e0f7fa;
+    padding: 2em;
+    border-radius: 10px;
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.services h2 {
+    color: #005f6b;
+    margin-bottom: 1em;
+}
+
+.service {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service i {
+    color: #028090;
+    margin-bottom: 0.5em;
+}
+
+.service-description {
+    color: #028090;
+}
+
+/* Footer styles */
+.footer-cover {
+    background-color: #1d220c;
+}
+
+footer .footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.links {
+    width: 50px;
+  height: 50px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 50px;
+  font-size: 35px;
+  margin: 0 10px;
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border: 2px solid #fff;
+  z-index: 1;
+} 
+
+footer a .icon {
+    position: relative;
+    color: #1d220c;
+    transition: .5s;
+    z-index: 3;
+  }
+
+.icon:hover {
+    color: white;
+    transform: rotateY(360deg);
+}
+
+.links:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f00;
+    transition: .5s;
+    z-index: 2;
+  }
+
+.links:hover:before {
+    top: 0;
+  }
+  
+.facebook:before{
+    background: #3b5999;
+  }
+  
+.linkedin:before{
+    background: #55acee;
+  }
+
+.insta:before {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d)
+  }
+  
+footer a {
+    color: white;
+    margin: 0 0.5em;
+    text-decoration: none;
+} 
+
+footer a:hover {
+    text-decoration: underline;
+} 
+
+footer a .icon {
+    position: relative;
+    color: #1d220c;
+    transition: .5s;
+    z-index: 3;
+  }
+
+.icon:hover {
+    color: white;
+    transform: rotateY(360deg);
+}
+
+.links:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f00;
+    transition: .5s;
+    z-index: 2;
+  }
+
+.links:hover:before {
+    top: 0;
+  }
+  
+.facebook:before{
+    background: #3b5999;
+  }
+  
+.linkedin:before{
+    background: #55acee;
+  }
+
+.insta:before {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d)
+  }
+  

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Django App{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% templates 'base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Italiana&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{% 'favicon.ico' %}">
+    <script src="https://kit.fontawesome.com/b4a11e6ad7.js" crossorigin="anonymous"></script>
+    
+    {% block extra_styles %}{% endblock %}
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <!-- Logo, Search, Sign-In, Language Dropdown -->
+        <div id="topnav" class="row nav-background pt-lg-2 d-none d-lg-flex align-items-center">
+            <div class="col-lg-6 d-flex justify-content-start align-items-center">
+                <!-- Logo -->
+                <a href="{% url 'home' %}" class="nav-link main-logo-link logo">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-image">
+                </a>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-end">
+                <div class="d-flex justify-content-start align-items-center">
+                    <!-- Search Bar -->
+                    <form method="GET" action="#" class="w-100">
+                        <div class="input-group w-100">
+                            <input class="form-control border-1 bg-transparent" type="text" name="q" placeholder="Search by Name" style="border-bottom: 1px solid #051c2c;">
+                            <div class="input-group-append">
+                                <button class="form-control btn border-0" type="submit">
+                                    <span class="icon"><i class="fas fa-search fa-lg" style="color: #051c2c;"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="d-flex justify-content-end align-items-center">
+                    <!-- Sign-In Link -->
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item dropdown">
+                            <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="text-center icon">
+                                    <div id="user-icon"><i class="far fa-user fa-lg"></i></div>
+                                    <p class="my-0" id="user-name">My Account</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                                <a href="{% url 'product_management' %}" class="dropdown-item" id="product-management" style="display: none;">Product Management</a>
+                                <a href="{% url 'profile' %}" class="dropdown-item" id="profile-link">My Profile</a>
+                                <a href="{% url 'logout' %}" class="dropdown-item" id="logout-link" style="display: none;">Logout</a>
+                                <a href="{% url 'register' %}" class="dropdown-item" id="register-link">Register</a>
+                                <a href="{% url 'login' %}" class="dropdown-item" id="login-link">Login</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex justify-content-end align-items-center">
+                    <!-- Language Dropdown -->
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item dropdown">
+                            <a class="text-black nav-link" href="#" id="language-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="text-center icon">
+                                    <i class="fas fa-globe fa-lg"></i>
+                                    <p class="my-0">EN</p> <!-- Changes to current language -->
+                                </div>
+                            </a>
+                            <div class="dropdown-menu border-0" aria-labelledby="language-options">
+                                <a href="#" class="dropdown-item">EN</a>
+                                <a href="#" class="dropdown-item">IT</a>
+                                <a href="#" class="dropdown-item">DE</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <div class="row nav-background">
+            <nav class="navbar navbar-expand-lg w-100 col-lg-12 justify-content-end d-flex">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="main-nav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'properties' %}">Properties</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'construction' %}">Construction</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'rent' %}">Rent</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Our Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main role="main" class="container-fluid p-0">
+        <div class="full-width">
+            {% block content %}
+            <!-- This will render the content of the individual views -->
+            {% endblock %}
+        </div>
+    </main>
+
+    {% block extra_scripts %}{% endblock %}
+
+    <!-- Footer Section -->
+    <footer class="footer-cover text-white text-center py-4">
+        <div class="footer-content">
+            <p>Follow us on social media:</p>
+            <p class="socials">
+                <a class="links facebook" href="https://www.facebook.com/buildingsardinia"><i class="fab fa-facebook-f icon"></i></a>
+                <a class="links linkedin" href="https://www.linkedin.com/buildingsardinia"><i class="fab fa-linkedin-in icon"></i></a>
+                <a class="links insta" href="https://www.instagram.com/buildingsardinia"><i class="fab fa-instagram icon"></i></a>
+            </p>
+            <p>&copy; 2024 Building Sardinia. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Include jQuery, Popper.js, and Bootstrap JS at the end of the body for better performance -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'scripts.js' %}"></script>
+</body>
+</html>
