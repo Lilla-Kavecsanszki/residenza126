@@ -111,6 +111,32 @@ header {
         font-size: 1.5rem;
     }
 }
+
+/* Ensure dropdown menus are responsive */
+@media (max-width: 992px) {
+    .d-lg-flex {
+        display: block !important;
+    }
+
+    .d-none.d-lg-flex {
+        display: none !important;
+    }
+}
+
+/* Ensure the logo scales on smaller screens */
+@media (max-width: 576px) {
+    .logo-image {
+        max-height: 100px; /* Adjust as needed */
+    }
+}
+
+/* Adjust dropdowns for mobile view */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        width: 100%;
+        box-shadow: none;
+    }
+}
   
 /* Hero section styles */
 .hero {
@@ -418,3 +444,62 @@ footer a .icon {
     background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d)
   }
   
+
+  /* -------------------------------- Media Queries */
+
+/* Slightly larger container on xl screens */
+@media (min-width: 1200px) {
+    .container {
+      max-width: 80%;
+    }
+  }
+  
+  /* fixed top navbar only on medium and up */
+  @media (min-width: 992px) {
+    .fixed-top-desktop-only {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1030;
+    }
+  
+    .header-container {
+      padding-top: 164px;
+    }
+  }
+  
+  /* pad the top a bit when navbar is collapsed on mobile */
+  @media (max-width: 991px) {
+    .header-container {
+      padding-top: 116px;
+    }
+  
+    body {
+      height: calc(100vh - 116px);
+    }
+  
+    .display-4.logo-font.text-black {
+          font-size: 2rem;
+    }
+  
+    .nav-link {
+          padding: 0.10rem;
+          font-size: 1rem;
+    }
+  
+    .nav-link i.fa-lg {
+          font-size: 1rem;    
+    }
+  
+    .navbar-toggler {
+          padding: .6rem .6rem;
+          font-size: 1rem;
+    }
+  
+  
+  @media (max-width: 767px) {
+      .mobile-view {
+          margin-bottom: 5%;
+      }
+    }}
