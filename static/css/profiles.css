@@ -1,0 +1,52 @@
+/* Profile page styles */
+.profile-container {
+    background-color: #ffffff; /* Background color for the profile section */
+    border-radius: 8px; /* Rounded corners for the form container */
+    padding: 2em; /* Padding inside the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    max-width: 600px; /* Limit the width of the profile form */
+    margin: 2em auto; /* Center the form with some margin */
+}
+
+.profile-form .form-group {
+    margin-bottom: 1.5em; /* Space between form fields */
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: #051c2c; /* Label text color */
+}
+
+.profile-form input, 
+.profile-form select, 
+.profile-form textarea {
+    width: 100%; /* Full width for input fields */
+    padding: 0.5em; /* Padding inside the fields */
+    border: 1px solid #ddd; /* Border color */
+    border-radius: 0.25rem; /* Rounded corners */
+    font-size: 1em; /* Font size for inputs */
+}
+
+.profile-form input:focus, 
+.profile-form select:focus, 
+.profile-form textarea:focus {
+    border-color: #051c2c; /* Border color on focus */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Shadow on focus */
+    outline: none; /* Remove default outline */
+}
+
+.profile-form button {
+    background-color: #051c2c; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 0.75em 1.5em; /* Padding inside the button */
+    font-size: 1em; /* Font size */
+    cursor: pointer; /* Cursor pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.profile-form button:hover {
+    background-color: #033b53; /* Darker shade on hover */
+}

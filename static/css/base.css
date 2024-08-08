@@ -59,6 +59,28 @@ header {
     color: #051c2c
 }
 
+/* Dropdown menu styles */
+.dropdown-menu {
+    background-color: #ffffff; /* Ensure the dropdown has a background color */
+    border: 1px solid #ddd; /* Add a border if needed */
+    border-radius: 0.25rem; /* Adjust border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+}
+
+.dropdown-item {
+    color: #051c2c; /* Ensure dropdown items have text color */
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa; /* Change background color on hover */
+    color: #051c2c; /* Ensure text color remains consistent */
+}
+
+/* Ensure that dropdown toggle is properly displayed */
+.dropdown-toggle::after {
+    display: none; /* Remove the default caret if not needed */
+}
+
 #language-options {
     color: #051c2c;
 }
