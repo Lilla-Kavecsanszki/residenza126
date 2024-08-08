@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-6">
+            {% if property.image %}
+                <img src="{{ property.image.url }}" alt="{{ property.name }}" class="img-fluid" />
+            {% else %}
+                <img src="{% static 'images/noimage.png' %}" alt="{{ property.name }}" class="img-fluid" />
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <h2>{{ property.name }}</h2>
+            <p><strong>Location:</strong> {{ property.location }}</p>
+            <p><strong>Type:</strong> {{ property.property_type }}</p>
+            <p><strong>Price:</strong> ${{ property.price }}</p>
+            <p><strong>Size:</strong> {{ property.size }} sq ft</p>
+            <p><strong>Description:</strong> {{ property.description }}</p>
+            <p><strong>Features:</strong> {{ property.features }}</p>
+            {% if property.video %}
+                <div>
+                    <video controls>
+                        <source src="{{ property.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="mt-4">
+        <a href="{% url 'property_list' %}" class="btn btn-primary">Back to Properties</a>
+    </div>
+</div>
+{% endblock %}

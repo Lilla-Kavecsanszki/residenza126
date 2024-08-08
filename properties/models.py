@@ -1,10 +1,21 @@
 from django.db import models
 
 class Property(models.Model):
+    PROPERTY_TYPES = [
+        ('House', 'House'),
+        ('Apartment', 'Apartment'),
+        ('Villa', 'Villa'),
+        # Add other types as needed
+    ]
+
+    LOCATIONS = [
+        ('Oristano', 'Oristano'),
+        ('Torregrande', 'Torregrande'),
+        ('Nolosodove', 'Nolosodove'),
+        # Add other locations as needed
+    ]
     name = models.CharField(max_length=255, default='')
     description = models.TextField(default='')
-    location = models.CharField(max_length=255, default='')
-    property_type = models.CharField(max_length=100, default='')
     features = models.TextField(default='')
     video = models.FileField(upload_to='videos/', blank=True, null=True)  # Updated field
     image = models.ImageField(upload_to='images/', blank=True, null=True)

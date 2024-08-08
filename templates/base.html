@@ -93,11 +93,11 @@
                                 {% if request.user.is_authenticated %}
                                 <!-- superuser -->
                                 {% if request.user.is_superuser %}
-                                <a href="{% url 'add_product' %}" class="dropdown-item"
+                                <a href="#" class="dropdown-item"
                                   >Product Management</a
                                 >
                                 {% endif %}
-                                <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+                                <a href="#" class="dropdown-item">My Profile</a>
                                 <a href="{% url 'account_logout' %}" class="dropdown-item"
                                   >Logout</a
                                 >
@@ -219,7 +219,7 @@
                             <a class="nav-link" href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Properties</a>
+                            <a class="nav-link" href="{% url 'property_list' %}">Properties</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Construction</a>

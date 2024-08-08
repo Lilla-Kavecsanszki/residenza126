@@ -1,0 +1,107 @@
+/* properties.css */
+
+/* Overlay effect */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none; /* Hide by default, show when needed */
+}
+
+/* Container for property listings */
+.product-container {
+    background-color: #f9f9f9; /* Light background for property cards */
+    border-radius: 10px;
+    padding: 2em;
+}
+
+/* Property card styles */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-img-top {
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+    height: 200px;
+}
+
+/* Card body styling */
+.card-body {
+    background-color: #fff;
+    padding: 1em;
+}
+
+.card-body p {
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.card-body .small {
+    color: #777;
+}
+
+/* Sorting select styles */
+.sort-select-wrapper {
+    margin-bottom: 1em;
+}
+
+.custom-select {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0.5em;
+}
+
+/* Pagination styles */
+.pagination {
+    margin: 2em 0;
+    text-align: center;
+}
+
+.step-links a {
+    color: #0056b3;
+    text-decoration: none;
+    margin: 0 0.5em;
+}
+
+.step-links a:hover {
+    text-decoration: underline;
+}
+
+.step-links .current {
+    font-weight: bold;
+}
+
+/* Help button styles */
+.help-button {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 0.5em;
+    z-index: 1000;
+}
+
+.help-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #daa520;
+    text-decoration: none;
+}
+
+.help-link i {
+    font-size: 2em;
+}

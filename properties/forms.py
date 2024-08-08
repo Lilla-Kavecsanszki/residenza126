@@ -4,4 +4,18 @@ from .models import Property
 class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
-        fields = ['name', 'description', 'location', 'property_type', 'features', 'video', 'image', 'bedrooms', 'bathrooms', 'price', 'size']
+        fields = [
+            'name', 
+            'description', 
+            'features', 
+            'video', 
+            'image', 
+            'bedrooms', 
+            'bathrooms', 
+            'price', 
+            'size'
+        ]
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 3}),
+            'features': forms.Textarea(attrs={'rows': 3}),
+        }
