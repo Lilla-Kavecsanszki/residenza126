@@ -25,5 +25,8 @@ class Property(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     size = models.PositiveIntegerField()
 
+    location = models.CharField(max_length=100, choices=LOCATIONS, default='Oristano')
+    property_type = models.CharField(max_length=50, choices=PROPERTY_TYPES, default='House')   
+
     def __str__(self):
         return self.name

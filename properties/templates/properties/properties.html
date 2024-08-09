@@ -6,104 +6,127 @@
 <link rel="stylesheet" href="{% static 'css/properties.css' %}" />
 {% endblock %}
 
-{% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col"></div>
-    </div>
-</div>
-{% endblock %}
-
 {% block content %}
-<div class="overlay"></div>
-<div class="container-fluid">
-    <div class="top-container col-10 offset-1">
-        <div class="col-md-6 top-container-info">
-            <div class="row mt-4">
-                <div class="col mt-3">
-                    <h2 class="logo-font">Properties</h2>
-                    <hr/>
-                </div>
+<div class="container">
+    <h2 class="logo-font">Properties{% if current_locations %}
+        - {{ current_locations.0 }}
+        {% elif current_property_types %}
+        - {{ current_property_types.0 }}
+        {% endif %}
+    </h2>
+    <hr/>
+
+    <!-- Search and Filter Banner -->
+    <div class="search-banner mb-4">
+        <form class="form-inline" method="GET" action="{% url 'all_properties' %}">
+            <div class="form-group mr-2">
+                <input type="text" class="form-control" placeholder="Search by Name" name="q" value="{{ search_query }}">
+                <button class="form-control btn border-0" type="submit">
+                    <span class="icon"><i class="fas fa-search fa-lg" style="color: #051c2c;"></i></span>
+                </button>
             </div>
-            <div class="row mt-1 mb-2">
-                <div class="col-12 col-md-6 order-md-first">
-                    <div class="sort-select-wrapper w-50">
-                        <form method="get" action="{% url 'property_list' %}">
-                            <select id="sort-selector" name="sort" class="custom-select custom-select-sm rounded-0">
-                                <option value="None_None" {% if not current_sorting %}selected{% endif %}>Sort by...</option>
-                                <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
-                                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
-                                <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
-                                <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
-                                <option value="location" {% if current_sorting == 'location' %}selected{% endif %}>Location</option>
-                                <option value="property_type" {% if current_sorting == 'property_type' %}selected{% endif %}>Property Type</option>
-                            </select>                        
-                            <button type="submit" class="btn btn-primary mt-2">Apply</button>
-                        </form>
+            <div class="form-group mr-2">
+                <select class="form-control" name="location">
+                    <option value="">Location</option>
+                    {% for loc in location_choices %}
+                        <option value="{{ loc.0 }}" {% if loc.0 in current_locations %}selected{% endif %}>
+                            {{ loc.1 }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group mr-2">
+                <select class="form-control" name="type">
+                    <option value="">Type</option>
+                    {% for type in property_types_choices %}
+                        <option value="{{ type.0 }}" {% if type.0 in current_property_types %}selected{% endif %}>
+                            {{ type.1 }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+    </div>
+
+    <div class="row mt-1 mb-2">
+        <div class="col-12 col-md-6 order-md-first">
+            <div class="sort-select-wrapper w-50">
+                <select id="sort-selector"
+                    class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
+                    <option value="size_asc" {% if current_sorting == 'size_asc' %}selected{% endif %}>Size Ascending</option>
+                    <option value="size_desc" {% if current_sorting == 'size_desc' %}selected{% endif %}>Size Descending</option>
+                    <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                    <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                
+                </select>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center">
+            <p class="text-muted mt-3 text-center text-md-left">
+                {% if search_query or current_locations or current_sorting != 'None_None' %}
+                <span class="small"><a href="{% url 'all_properties' %}">All Properties</a> | </span>
+                {% endif %}
+                {{ properties|length }} Properties{% if search_query %} found for <strong>"{{ search_query }}"</strong>{% endif %}
+            </p>
+        </div>
+    </div>
+
+    <div class="property-container mb-3 col-10 offset-1">
+        <div class="row">
+            {% for property in properties %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 text-center">
+                    {% if property.image %}
+                    <a href="{% url 'property_detail' property.id %}">
+                        <img class="card-img-top img-fluid" src="{{ property.image.url }}" alt="{{ property.name }}" />
+                    </a>
+                    {% else %}
+                    <a href="{% url 'property_detail' property.id %}">
+                        <img class="card-img-top img-fluid" src="{% static 'img/noimage.png' %}" alt="{{ property.name }}" />
+                    </a>
+                    {% endif %}
+                    <div class="card-body pb-0">
+                        <p class="mb-2">{{ property.name }}</p>
+                        <p class="small mt-1 mb-3">
+                            <a class="text-muted" href="{% url 'all_properties' %}?location={{ property.location }}">
+                                <i class="fas fa-location-arrow mr-1"></i>
+                                {{ property.location }}
+                            </a>
+                        </p>
+                        <p class="small mt-1 mb-3">
+                            <a class="text-muted" href="{% url 'all_properties' %}?type={{ property.property_type }}">
+                                <i class="fas fa-home mr-1"></i>
+                                {{ property.property_type }}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white pt-0 border-0 text-center">
+                        <div class="row">
+                            <div class="col">
+                                <p class="mb-0 font-weight-bold">€{{ property.price }}</p>
+                                <p class="mb-0">Price</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center">
-                    <p class="text-muted mt-3 text-center text-md-left">
-                        {% if search_query or location_filter or type_filter or current_sorting != 'None_None' %}
-                        <span class="small"><a href="{% url 'property_list' %}">All Properties</a> | </span>
-                        {% endif %}
-                        {{ page_obj.paginator.count }} Properties{% if search_query %} found for <strong>"{{ search_query }}"</strong>{% endif %}
-                    </p>
-                </div>
             </div>
+            {% if forloop.counter|divisibleby:2 %}
+            <div class="col-12 d-md-none d-lg-none mb-5">
+                <hr/>
+            </div>
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
-</div>
-<div class="product-container mb-3 col-10 offset-1">
-    <div class="row">
-        {% for property in page_obj %}
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100 border-0 text-center">
-                {% if property.image %}
-                <a href="{% url 'property_detail' property.id %}">
-                    <img class="card-img-top img-fluid" src="{{ property.image.url }}" alt="{{ property.name }}" />
-                </a>
-                {% else %}
-                <a href="{% url 'property_detail' property.id %}">
-                    <img class="card-img-top img-fluid" src="{% static 'images/noimage.png' %}" alt="{{ property.name }}" />
-                </a>
-                {% endif %}
-                <div class="card-body pb-0">
-                    <p class="mb-2">{{ property.name }}</p>
-                    <p class="small">{{ property.location }}</p>
-                    <p class="mb-2">${{ property.price }}</p>
-                    <p class="small">{{ property.size }} sq ft</p>
-                </div>
-            </div>
-        </div>
-        {% if forloop.counter|divisibleby:3 %}
-        <div class="col-12 d-md-none d-lg-none mb-5">
-            <hr/>
-        </div>
-        {% endif %}
-        {% endfor %}
+
+    <div class="help-button shadow-sm rounded-0">
+        <a class="help-link d-flex h-100" href="{% url 'contact_us' %}">
+            <i class="fa-solid fa-circle-info fa-bounce fa-xl mx-auto my-auto" style="color: #daa520;"></i>
+        </a>
     </div>
 </div>
-<div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1{% if search_query %}&search={{ search_query }}{% endif %}{% if location_filter %}&location={{ location_filter }}{% endif %}{% if type_filter %}&type={{ type_filter }}{% endif %}{% if current_sorting %}&sort={{ current_sorting }}{% endif %}">First</a>
-            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if location_filter %}&location={{ location_filter }}{% endif %}{% if type_filter %}&type={{ type_filter }}{% endif %}{% if current_sorting %}&sort={{ current_sorting }}{% endif %}">Previous</a>
-        {% endif %}
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if location_filter %}&location={{ location_filter }}{% endif %}{% if type_filter %}&type={{ type_filter }}{% endif %}{% if current_sorting %}&sort={{ current_sorting }}{% endif %}">Next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&search={{ search_query }}{% endif %}{% if location_filter %}&location={{ location_filter }}{% endif %}{% if type_filter %}&type={{ type_filter }}{% endif %}{% if current_sorting %}&sort={{ current_sorting }}{% endif %}">Last</a>
-        {% endif %}
-    </span>
-</div>
-<div class="help-button shadow-sm rounded-0">
-    <a class="help-link d-flex h-100" href="{% url 'contact_us' %}">
-        <i class="fa-solid fa-circle-info fa-bounce fa-xl mx-auto my-auto" style="color: #daa520;"></i>
-    </a>
-</div>
+
 {% endblock %}
 
 {% block postloadjs %}
@@ -115,7 +138,7 @@
         var currentUrl = new URL(window.location);
 
         var selectedVal = selector.val();
-        if (selectedVal != "None_None") {
+        if (selectedVal != "reset") {
             var sort = selectedVal.split("_")[0];
             var direction = selectedVal.split("_")[1];
 
@@ -129,6 +152,6 @@
 
             window.location.replace(currentUrl);
         }
-    });
+    })
 </script>
 {% endblock %}

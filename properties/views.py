@@ -11,25 +11,37 @@ def all_properties(request):
     query = None
     locations = None
     property_types = None
-    sort = None
-    direction = None
+    sort = 'created_at'  # Default sorting field
+    direction = 'asc'     # Default sorting direction
 
     # Handle sorting
     if 'sort' in request.GET:
         sortkey = request.GET['sort']
-        sort = sortkey
-        if sortkey == 'name':
-            sortkey = 'lower_name'
-            properties = properties.annotate(lower_name=Lower('name'))
-        elif sortkey == 'location':
-            sortkey = 'location'
-        elif sortkey == 'property_type':
-            sortkey = 'property_type'
-        if 'direction' in request.GET:
-            direction = request.GET['direction']
-            if direction == 'desc':
-                sortkey = f'-{sortkey}'
-        properties = properties.order_by(sortkey)
+        valid_sort_keys = ['name', 'location', 'property_type', 'size', 'price', 'created_at']
+        
+        if sortkey in valid_sort_keys:
+            sort = sortkey
+            if sortkey == 'name':
+                properties = properties.annotate(lower_name=Lower('name'))
+                sortkey = 'lower_name'
+            elif sortkey == 'location':
+                sortkey = 'location'
+            elif sortkey == 'property_type':
+                sortkey = 'property_type'
+            elif sortkey == 'size':
+                sortkey = 'size'
+            elif sortkey == 'price':
+                sortkey = 'price'
+            elif sortkey == 'created_at':
+                sortkey = 'created_at'
+        
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            properties = properties.order_by(sortkey)
+        else:
+            messages.error(request, "Invalid sort option selected.")
 
     # Handle filtering by location
     if 'location' in request.GET:
@@ -45,12 +57,10 @@ def all_properties(request):
     if 'q' in request.GET:
         query = request.GET['q']
         if not query:
-            messages.error(
-                request, "You didn't enter any search criteria!")
-            return redirect(reverse('property_list'))
+            messages.error(request, "You didn't enter any search criteria!")
+            return redirect(reverse('all_properties'))
 
-        queries = Q(name__icontains=query) | Q(
-            description__icontains=query)
+        queries = Q(name__icontains=query) | Q(description__icontains=query)
         properties = properties.filter(queries)
 
     current_sorting = f'{sort}_{direction}'
@@ -61,17 +71,25 @@ def all_properties(request):
         'current_locations': locations,
         'current_property_types': property_types,
         'current_sorting': current_sorting,
+        'location_choices': Property.LOCATIONS,  # Providing choices for location filter
+        'property_types_choices': Property.PROPERTY_TYPES,  # Providing choices for property type filter
     }
 
     return render(request, 'properties/properties.html', context)
 
+from django.shortcuts import render, get_object_or_404
+from .models import Property
+
 def property_detail(request, property_id):
     """ A view to show individual property details """
 
+    # Fetch the property object or return a 404 if not found
     property = get_object_or_404(Property, pk=property_id)
 
+    # Context data to be passed to the template
     context = {
         'property': property,
     }
 
-    return render(request, 'properties/property_detail.html', context)
+    # Render the property detail template with the context data
+    return render(request, 'properties/property_details.html', context)
