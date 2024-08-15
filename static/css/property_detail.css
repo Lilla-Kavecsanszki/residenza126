@@ -1,0 +1,62 @@
+body {
+    font-family: "Cormorant Garamond", serif;
+    background-color: white;
+    color: #051c2c;
+}
+
+.container {
+    padding: 2em;
+    margin-top: 9%
+}
+
+.property-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.property-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.property-details,
+.property-features {
+    flex: 1 1 45%;
+    box-sizing: border-box;
+}
+
+.property-details {
+    border-right: 1px solid #ddd;
+    padding-right: 1rem;
+}
+
+.property-features {
+    padding-left: 1rem;
+}
+
+.property-carousel img {
+    width: 100%;
+    height: auto;
+}
+
+.carousel {
+    width: 100%;
+    max-height: 600px;
+    margin-bottom: 1.5rem;
+}
+
+.property-description {
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .property-details,
+    .property-features {
+        flex: 1 1 100%;
+        border-right: none;
+        padding-right: 0;
+        padding-left: 0;
+    }
+}

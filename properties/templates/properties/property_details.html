@@ -1,35 +1,91 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/property_detail.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+{% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="row mt-4">
-        <div class="col-md-6">
-            {% if property.image %}
-                <img src="{{ property.image.url }}" alt="{{ property.name }}" class="img-fluid" />
-            {% else %}
-                <img src="{% static 'images/noimage.png' %}" alt="{{ property.name }}" class="img-fluid" />
-            {% endif %}
-        </div>
-        <div class="col-md-6">
-            <h2>{{ property.name }}</h2>
-            <p><strong>Location:</strong> {{ property.location }}</p>
-            <p><strong>Type:</strong> {{ property.property_type }}</p>
-            <p><strong>Price:</strong> ${{ property.price }}</p>
-            <p><strong>Size:</strong> {{ property.size }} sq ft</p>
-            <p><strong>Description:</strong> {{ property.description }}</p>
-            <p><strong>Features:</strong> {{ property.features }}</p>
-            {% if property.video %}
-                <div>
-                    <video controls>
-                        <source src="{{ property.video.url }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+    <h2 class="property-title">{{ property.name }}</h2>
+    <p>Property Name: {{ property.name }}</p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="property-carousel">
+                {% if property.image %}
+                <div class="carousel">
+                    <div>
+                        <img src="{{ property.image.url }}" alt="{{ property.name }}">
+                    </div>
+                    {% for img in property.images.all %}
+                    <div>
+                        <img src="{{ img.image.url }}" alt="{{ property.name }}">
+                    </div>
+                    {% endfor %}
                 </div>
-            {% endif %}
+                {% else %}
+                <p>No images available.</p>
+                {% endif %}
+            </div>
+            <div class="property-info">
+                <div class="property-details">
+                    <p><strong>Location:</strong> {{ property.location }}</p>
+                    <p><strong>Size:</strong> {{ property.size }} sq ft</p>
+                    <p><strong>Type:</strong> {{ property.property_type }}</p>
+                    <p><strong>Bedrooms:</strong> {{ property.bedrooms }}</p>
+                    <p><strong>Bathrooms:</strong> {{ property.bathrooms }}</p>
+                </div>
+                <div class="property-features">
+                    <h4>Features:</h4>
+                    <ul>
+                        {% if property.features %}
+                        {% for feature in property.features.splitlines %}
+                        <li>{{ feature }}</li>
+                        {% endfor %}
+                        {% else %}
+                        <li>No features listed.</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="property-description text-center">
+                <h4>Description:</h4>
+                <p>{{ property.description }}</p>
+            </div>
+            <a href="{% url 'all_properties' %}" class="btn btn-primary">Back to Properties</a>
         </div>
-    </div>
-    <div class="mt-4">
-        <a href="{% url 'property_list' %}" class="btn btn-primary">Back to Properties</a>
     </div>
 </div>
 {% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.carousel').slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    arrows: false,
+                    dots: true
+                }
+            }
+        ]
+    });
+});
+</script>
+{% endblock %}
+
+

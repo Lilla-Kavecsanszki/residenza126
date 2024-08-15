@@ -82,14 +82,9 @@ def all_properties(request):
 
 def property_detail(request, property_id):
     """ A view to show individual property details """
-
-    # Fetch the property object or return a 404 if not found
     property = get_object_or_404(Property, pk=property_id)
-
-    # Context data to be passed to the template
     context = {
         'property': property,
     }
-
-    # Render the property detail template with the context data
     return render(request, 'properties/property_details.html', context)
+
