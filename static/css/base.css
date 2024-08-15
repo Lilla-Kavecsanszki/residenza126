@@ -205,6 +205,8 @@ main {
     font-family: "Italiana", sans-serif;
     text-transform: uppercase; 
     margin-bottom: 1em;
+    font-size: 2.5em;          /* Larger font size for a bold presence */
+    font-weight: 600;
 }
 
 /* Carousel */
@@ -296,36 +298,108 @@ main {
     color: #051c2c;
 }
 
-/* Services/Features section styles */
-.services {
-    background-color: #e0f7fa;
-    padding: 2em;
-    border-radius: 10px;
-    margin-bottom: 2em;
-    text-align: center;
+/* About Section Styles */
+.about {
+    background-color: #051c2c; 
+    padding: 10em;              
+    margin-bottom: 3em;      
+    text-align: center;      
 }
 
-.services h2 {
-    color: #005f6b;
+.about h2 {
+    color: white;
+    font-family: "Italiana", sans-serif;
+    text-transform: uppercase;             
+    margin-bottom: 1.5em;      /* More space below the title for prominence */
+    font-size: 2.5em;          /* Larger font size for a bold presence */
+    font-weight: 600;         
+}
+
+/* Company Card Styles */
+.company {
+    background-color: white;   
+    border: 1px solid #051c2c;
+    border-radius: 1px;      
+    padding: 1.5em;              /* Increased padding for a more luxurious feel */
+    margin: 1.5em;             /* Adjusted margin for spacing between cards */
+    box-shadow: 0 6px 12px rgba(174, 134, 37, 0.5);
+    text-align: center;  
+    height: 450px;              
+}
+
+/* Media Styling for Uniformity */
+.company img, 
+.media-item {
+    width: 100%;         
+    height: 350px;            
+    object-fit: cover;         /* Cover to maintain aspect ratio and fill the space */
+    border-radius: 5px;       
+    display: block;            /* Ensure block-level rendering */
+    margin: 0 auto;            /* Center the media within its container */
+}
+
+/* Description Styling */
+.company-description {
+    color: #051c2c;            
+    font-size: 1.3em;          
+    margin-top: 0.5em;           /* Space above the description */
+    font-weight: 500;         
+}
+
+.stats-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #051c2c;
+    border-radius: 5px;
+}
+
+.stats-item {
     margin-bottom: 1em;
 }
 
-.service {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 1em;
-    margin: 1em;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.stats-number {
+    font-size: 3em;            /* Large font size for numbers */
+    color: #051c2c;            /* Dark color for emphasis */
+    font-weight: 700;          /* Bold for prominence */
+    display: block;            /* Block display for better alignment */
 }
 
-.service i {
-    color: #028090;
-    margin-bottom: 0.5em;
+.stats-label {
+    font-size: 1.2em;          /* Slightly larger font size for labels */
+    color: #051c2c;            /* Dark color for consistency */
+    font-weight: 400;          /* Normal weight for labels */
+    text-transform: uppercase; /* Uppercase for a classic feel */
 }
 
-.service-description {
-    color: #028090;
+/* Company Story Section Styles */
+.company-story {
+    background-color: #f9f9f9; 
+    padding: 2em;              
+    border-radius: 10px;       
+    margin-top: 2em;           
+    text-align: center;       
+}
+
+.company-story h2 {
+    color: #051c2c;            
+    margin-bottom: 1em;        
+    font-size: 2em;            
+    font-weight: bold;         
+}
+
+.company-story p {
+    color: #051c2c;            
+    line-height: 1.6;          
+    margin-bottom: 1em;        
+    font-size: 1em;            
+}
+
+/* Optional: Additional styling for the lead paragraph */
+.company-story .lead {
+    font-size: 1.25em;         /* Slightly larger font size for lead paragraph */
+    font-weight: normal;       /* Regular weight for lead text */
 }
 
 /* Footer styles */
