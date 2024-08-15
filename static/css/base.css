@@ -322,7 +322,7 @@ main {
     border-radius: 1px;      
     padding: 1.5em;              /* Increased padding for a more luxurious feel */
     margin: 1.5em;             /* Adjusted margin for spacing between cards */
-    box-shadow: 0 6px 12px rgba(174, 134, 37, 0.5);
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.3);
     text-align: center;  
     height: 450px;              
 }
@@ -402,7 +402,7 @@ main {
 .company-story .company-video {
     width: 100%;
     height: auto;
-    box-shadow: 0 6px 12px rgba(247, 239, 138, 0.8); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 1);
     border-radius: 5px;
 }
 

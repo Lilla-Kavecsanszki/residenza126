@@ -17,103 +17,134 @@
     <hr/>
 
     <!-- Search and Filter Banner -->
-    <div class="search-banner mb-4">
-        <form class="form-inline" method="GET" action="{% url 'all_properties' %}">
-            <div class="form-group mr-2">
-                <input type="text" class="form-control" placeholder="Search by Name" name="q" value="{{ search_query }}">
-                <button class="form-control btn border-0" type="submit">
-                    <span class="icon"><i class="fas fa-search fa-lg" style="color: #051c2c;"></i></span>
-                </button>
-            </div>
-            <div class="form-group mr-2">
-                <select class="form-control" name="location">
-                    <option value="">Location</option>
-                    {% for loc in location_choices %}
-                        <option value="{{ loc.0 }}" {% if loc.0 in current_locations %}selected{% endif %}>
-                            {{ loc.1 }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="form-group mr-2">
-                <select class="form-control" name="type">
-                    <option value="">Type</option>
-                    {% for type in property_types_choices %}
-                        <option value="{{ type.0 }}" {% if type.0 in current_property_types %}selected{% endif %}>
-                            {{ type.1 }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </form>
+    <div class="search-box text-center">
+        <div class="search-banner mb-4">
+            <form class="form-inline" method="GET" action="{% url 'all_properties' %}">
+                <div class="form-group mr-2">
+                    <input type="text" class="form-control" placeholder="Search by Name" name="q" value="{{ search_query }}">
+                    <button class="form-control btn" type="submit">
+                        <span class="icon"><i class="fas fa-search fa-lg" style="color: #051c2c;"></i></span>
+                    </button>
+                </div>
+                <div class="form-group mr-2">
+                    <select class="form-control" name="location">
+                        <option value="">Location</option>
+                        {% for loc in location_choices %}
+                            <option value="{{ loc.0 }}" {% if loc.0 in current_locations %}selected{% endif %}>
+                                {{ loc.1 }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group mr-2">
+                    <select class="form-control" name="type">
+                        <option value="">Type</option>
+                        {% for type in property_types_choices %}
+                            <option value="{{ type.0 }}" {% if type.0 in current_property_types %}selected{% endif %}>
+                                {{ type.1 }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form>
+        </div>
     </div>
 
-    <div class="row mt-1 mb-2">
-        <div class="col-12 col-md-6 order-md-first">
-            <div class="sort-select-wrapper w-50">
+    <div class="row mt-1 mb-5 align-items-center justify-content-center sorting-box">
+        <div class="col-12 col-md-6 d-flex justify-content-center mb-2 mb-md-0">
+            <div class="sort-select-wrapper">
                 <select id="sort-selector"
                     class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
                     <option value="size_asc" {% if current_sorting == 'size_asc' %}selected{% endif %}>Size (smaller to larger)</option>
                     <option value="size_desc" {% if current_sorting == 'size_desc' %}selected{% endif %}>Size (larger to smaller)</option>
                     <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
                     <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
-                
                 </select>
             </div>
         </div>
-        <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center">
-            <p class="text-muted mt-3 text-center text-md-left">
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+            <p class="text-muted mb-0 text-center text-md-left">
                 {% if search_query or current_locations or current_sorting != 'None_None' %}
-                <span class="small"><a href="{% url 'all_properties' %}">All Properties</a> | </span>
+                <span class="small text-white"><a class="text-white" href="{% url 'all_properties' %}">All Properties</a> | </span>
                 {% endif %}
                 {{ properties|length }} Properties{% if search_query %} found for <strong>"{{ search_query }}"</strong>{% endif %}
             </p>
         </div>
     </div>
 
-    <div class="property-container mb-3 col-10 offset-1">
+    <div class="property-container mb-3">
         <div class="row">
             {% for property in properties %}
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 border-0 text-center">
-                    {% if property.image %}
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card h-100 border-0">
+                    {% if property.video %}
+                    <!-- Render video if available -->
                     <a href="{% url 'property_detail' property.id %}">
-                        <img class="card-img-top img-fluid" src="{{ property.image.url }}" alt="{{ property.name }}" />
+                        <video class="card-img-top img-fluid" autoplay muted loop>
+                            <source src="{{ property.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </a>
+                    {% elif property.image %}
+                    <!-- Render image if video is not available -->
+                    <a href="{% url 'property_detail' property.id %}">
+                        <img class="card-img-top img-fluid" src="{{ property.image.url }}" alt="{{ property.name }}">
                     </a>
                     {% else %}
+                    <!-- Fallback image if neither video nor image is available -->
                     <a href="{% url 'property_detail' property.id %}">
-                        <img class="card-img-top img-fluid" src="{% static 'img/noimage.png' %}" alt="{{ property.name }}" />
+                        <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ property.name }}">
                     </a>
                     {% endif %}
                     <div class="card-body pb-0">
-                        <p class="mb-2">{{ property.name }}</p>
-                        <p class="small mt-1 mb-3">
-                            <a class="text-muted" href="{% url 'all_properties' %}?location={{ property.location }}">
-                                <i class="fas fa-location-arrow mr-1"></i>
-                                {{ property.location }}
-                            </a>
-                        </p>
-                        <p class="small mt-1 mb-3">
-                            <a class="text-muted" href="{% url 'all_properties' %}?type={{ property.property_type }}">
-                                <i class="fas fa-home mr-1"></i>
-                                {{ property.property_type }}
-                            </a>
+                        <p class="mb-0 d-flex justify-content-between align-items-baseline">
+                            {{ property.name }}
+                            <span class="price">${{ property.price }}</span>
                         </p>
                     </div>
-                    <div class="card-footer bg-white pt-0 border-0 text-center">
+                    <div class="card-footer bg-white pt-0 border-0 text-left">
                         <div class="row">
-                            <div class="col">
-                                <p class="mb-0 font-weight-bold">€{{ property.price }}</p>
-                                <p class="mb-0">Price</p>
+                            <div class="col-12">
+                                <!-- Property Details -->
+                                <div class="property-details">
+                                    {% if property.size %}
+                                    <p class="small mb-0">
+                                        <i class="fas fa-ruler mr-1"></i>{{ property.size }} sq ft
+                                    </p>
+                                    {% endif %}
+                                    {% if property.bedrooms %}
+                                    <p class="small mb-0">
+                                        <i class="fas fa-bed mr-1"></i>{{ property.bedrooms }} Bedrooms
+                                    </p>
+                                    {% endif %}
+                                    {% if property.bathrooms %}
+                                    <p class="small mb-0">
+                                        <i class="fas fa-bath mr-1"></i>{{ property.bathrooms }} Bathrooms
+                                    </p>
+                                    {% endif %}
+                                    {% if property.location %}
+                                    <p class="small mb-0">
+                                        <i class="fas fa-map-marker-alt mr-1"></i>{{ property.location }}
+                                    </p>
+                                    {% endif %}
+                                    {% if property.type %}
+                                    <p class="small mt-1 mb-0">
+                                        <a class="text-muted" href="{% url 'properties' %}?category={{ property.type }}">
+                                            <i class="fas fa-tag mr-1"></i>{{ property.type }}
+                                        </a>
+                                    </p>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
-            {% if forloop.counter|divisibleby:2 %}
-            <div class="col-12 d-md-none d-lg-none mb-5">
-                <hr/>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+            <div class="col-12 d-none d-lg-block mb-5">
+                <hr>
             </div>
             {% endif %}
             {% endfor %}
@@ -132,7 +163,7 @@
 {% block postloadjs %}
 {{ block.super }}
 
-<script>
+<script type="text/javascript">
     $('#sort-selector').change(function () {
         var selector = $(this);
         var currentUrl = new URL(window.location);

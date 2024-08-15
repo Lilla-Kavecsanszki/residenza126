@@ -1,16 +1,13 @@
-/* properties.css */
-
 body {
     font-family: "Cormorant Garamond", serif;
     background-color: #051c2c;
     color: whitesmoke;
-    padding-top: 10%; /* Adjusted to avoid navbar overlap */
 }
 
-/* Container for Contact Page */
 .container {
     padding: 2em;
-    margin-top: 4%
+    margin-top: 9%;
+    max-width: 1200px;
 }
 
 /* Heading Styles */
@@ -20,6 +17,15 @@ h1, h2 {
 }
 
 /* Search Banner Container */
+.search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Center vertically if needed */
+    width: 100%;
+    padding: 0 15px; /* Add padding for smaller screens */
+}
+
 .search-banner {
     background-color: #051c2c; /* Dark blue background */
     padding: 20px; /* Padding around the content */
@@ -86,8 +92,8 @@ h1, h2 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .search-banner .form-control, 
-    .search-banner .btn, 
+    .search-banner .form-control,
+    .search-banner .btn,
     .search-banner input[type="text"] {
         margin-bottom: 10px; /* Add space between elements on small screens */
         width: 100%; /* Make inputs and buttons full-width */
@@ -99,10 +105,49 @@ h1, h2 {
     }
 }
 
+/* Responsive alignment and spacing */
+.sorting-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; /* Vertically center items */
+    justify-content: center; /* Center items horizontally */
+}
+
+.sort-select-wrapper {
+    max-width: 100%; /* Ensure select does not exceed its container */
+    max-width: 400px;
+}
+
+.custom-select {
+    max-width: 400px;
+    color: #051c2c;
+}
+
+/* Ensure proper alignment of sort-select and text */
+.d-flex {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+@media (max-width: 768px) {
+    .sorting-box {
+        flex-direction: column; /* Stack items vertically on small screens */
+        text-align: center; /* Center text on small screens */
+    }
+
+    .col-12 {
+        margin-bottom: 10px; /* Add space between stacked items */
+    }
+
+    .sort-select-wrapper select {
+        max-width: 100%; /* Make sure the select box is responsive */
+    }
+}
+
 /* Property card styles */
 .card {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
     transition: transform 0.2s ease-in-out;
 }
 
@@ -124,22 +169,31 @@ h1, h2 {
 
 .card-body p {
     margin-bottom: 0.5em;
+    color: #051c2c;
+}
+
+/* Card footer styles for property details */
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 1em;
+    border-top: none;
+}
+
+.card-footer .property-details p {
+    margin-bottom: 0.25em; /* Adjust spacing between property details */
     color: #333;
 }
 
-.card-body .small {
+.card-footer .property-details .small {
     color: #777;
 }
 
-/* Sorting select styles */
-.sort-select-wrapper {
-    margin-bottom: 1em;
-}
-
-.custom-select {
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    padding: 0.5em;
+/* Price styling */
+.price {
+    font-weight: bold;
+    font-size: 1.25rem;
 }
 
 /* Pagination styles */
@@ -149,7 +203,7 @@ h1, h2 {
 }
 
 .step-links a {
-    color: #0056b3;
+    color: red;
     text-decoration: none;
     margin: 0 0.5em;
 }
@@ -167,7 +221,6 @@ h1, h2 {
     position: fixed;
     bottom: 1em;
     right: 1em;
-    background-color: #fff;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 0.5em;
@@ -183,5 +236,36 @@ h1, h2 {
 }
 
 .help-link i {
-    font-size: 2em;
+    font-size: 2.5em;
+}
+
+.help-button a {
+    text-decoration: none;
+}
+
+/* Adjustments for 3 cards layout */
+@media (min-width: 768px) {
+    .property-container .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .property-container .col-md-4 {
+        flex: 0 0 33.3333%; /* 3 cards per row */
+        max-width: 33.3333%;
+    }
+}
+
+@media (max-width: 768px) {
+    .property-container .col-sm-6 {
+        flex: 0 0 50%; /* 2 cards per row on smaller screens */
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    .property-container .col-12 {
+        flex: 0 0 100%; /* 1 card per row on extra-small screens */
+        max-width: 100%;
+    }
 }
