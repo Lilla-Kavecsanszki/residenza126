@@ -153,7 +153,7 @@
                     <div class="dropdown-menu dropdown-menu-center border-0" aria-labelledby="user-options-mobile">
                         {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser %}
-                        <a href="#" class="dropdown-item">Product Management</a>
+                        <a href="#" class="dropdown-item">Property Management</a>
                         {% endif %}
                         <a href="#" class="dropdown-item">My Profile</a>
                         <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
@@ -222,7 +222,7 @@
                             <a class="nav-link" href="{% url 'all_properties' %}">Properties</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Construction</a>
+                            <a class="nav-link" href="{% url 'construction' %}">Construction</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'home' %}#about">About</a>

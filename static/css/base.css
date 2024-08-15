@@ -376,31 +376,47 @@ main {
 /* Company Story Section Styles */
 .company-story {
     background-color: #f9f9f9; 
-    padding: 2em;              
-    border-radius: 10px;       
+    padding: 1em;                
     margin-top: 2em;           
     text-align: center;       
 }
 
 .company-story h2 {
-    color: #051c2c;            
+    color: #051c2c;    
+    font-family: "Cormorant Garamond", serif;    
+    text-align: justify;  
     margin-bottom: 1em;        
-    font-size: 2em;            
-    font-weight: bold;         
+    font-size: 2.3em;       
+    font-weight: 600;          
 }
 
 .company-story p {
-    color: #051c2c;            
+    color: #051c2c;    
+    font-family: "Cormorant Garamond", serif; 
+    text-align: justify;       
     line-height: 1.6;          
     margin-bottom: 1em;        
     font-size: 1em;            
 }
 
-/* Optional: Additional styling for the lead paragraph */
-.company-story .lead {
-    font-size: 1.25em;         /* Slightly larger font size for lead paragraph */
-    font-weight: normal;       /* Regular weight for lead text */
+.company-story .company-video {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 6px 12px rgba(247, 239, 138, 0.8); 
+    border-radius: 5px;
 }
+
+.about-video {
+    padding-left: 5em;
+}
+
+@media (max-width: 991px) {
+    .company-story .col-lg-7,
+    .company-story .col-lg-5 {
+        text-align: justify;
+    }
+}
+
 
 /* Footer styles */
 .footer-cover {

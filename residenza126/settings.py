@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'properties',
     'profiles',
     'contact',
+    'construction',
 ]
 
 # Ensure you have a unique SITE_ID

@@ -2,13 +2,12 @@ body {
     font-family: "Cormorant Garamond", serif;
     background-color: #051c2c;
     color: whitesmoke;
-    padding-top: 10%; /* Adjusted to avoid navbar overlap */
 }
 
 /* Container for Contact Page */
 .container {
     padding: 2em;
-    margin-top: 4%
+    margin-top: 12%
 }
 
 /* Heading Styles */

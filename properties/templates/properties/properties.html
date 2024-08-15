@@ -54,8 +54,8 @@
             <div class="sort-select-wrapper w-50">
                 <select id="sort-selector"
                     class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
-                    <option value="size_asc" {% if current_sorting == 'size_asc' %}selected{% endif %}>Size Ascending</option>
-                    <option value="size_desc" {% if current_sorting == 'size_desc' %}selected{% endif %}>Size Descending</option>
+                    <option value="size_asc" {% if current_sorting == 'size_asc' %}selected{% endif %}>Size (smaller to larger)</option>
+                    <option value="size_desc" {% if current_sorting == 'size_desc' %}selected{% endif %}>Size (larger to smaller)</option>
                     <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
                     <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
                 
