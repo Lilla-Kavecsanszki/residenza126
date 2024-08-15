@@ -116,6 +116,7 @@ h1, h2 {
 .sort-select-wrapper {
     max-width: 100%; /* Ensure select does not exceed its container */
     max-width: 400px;
+    color: #051c2c;
 }
 
 .custom-select {
@@ -147,7 +148,7 @@ h1, h2 {
 /* Property card styles */
 .card {
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
     transition: transform 0.2s ease-in-out;
 }
 
@@ -183,11 +184,11 @@ h1, h2 {
 
 .card-footer .property-details p {
     margin-bottom: 0.25em; /* Adjust spacing between property details */
-    color: #333;
+    color: #051c2c;
 }
 
 .card-footer .property-details .small {
-    color: #777;
+    color: #051c2c;
 }
 
 /* Price styling */
@@ -196,25 +197,29 @@ h1, h2 {
     font-size: 1.25rem;
 }
 
-/* Pagination styles */
-.pagination {
-    margin: 2em 0;
-    text-align: center;
+.property-details .row {
+    display: flex;
+    justify-content: space-between; /* Adjusts spacing between the two columns */
 }
 
-.step-links a {
-    color: red;
-    text-decoration: none;
-    margin: 0 0.5em;
+.property-details .col-6 {
+    flex: 0 0 48%; /* Each column takes up about half the width */
+    max-width: 48%;
 }
 
-.step-links a:hover {
-    text-decoration: underline;
+.property-details .small {
+    color: #777;
+    margin-bottom: 0.5em; /* Adds spacing between items */
 }
 
-.step-links .current {
-    font-weight: bold;
+/* Make sure there is enough spacing between the columns on smaller screens */
+@media (max-width: 768px) {
+    .property-details .col-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
+
 
 /* Help button styles */
 .help-button {
