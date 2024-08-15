@@ -6,14 +6,17 @@ body {
 
 .container {
     padding: 2em;
-    margin-top: 9%;
+    margin-top: 14%;
     max-width: 1200px;
 }
 
 /* Heading Styles */
 h1, h2 {
     text-align: center;
-    font-family: "Cinzel", serif;
+    font-family: "Italiana", sans-serif;
+    color: #fff;
+    font-size: 2.5em;          /* Larger font size for a bold presence */
+    font-weight: 400;
 }
 
 /* Search Banner Container */

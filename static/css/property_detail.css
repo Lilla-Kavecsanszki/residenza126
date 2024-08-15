@@ -6,12 +6,16 @@ body {
 
 .container {
     padding: 2em;
-    margin-top: 9%
+    margin-top: 11%
 }
 
 .property-title {
-    font-size: 2rem;
     margin-bottom: 1rem;
+    text-align: center;
+    font-family: "Italiana", sans-serif;
+    font-size: 2.5em;          
+    font-weight: 400;
+    padding-bottom: 2%;
 }
 
 .property-info {
@@ -25,6 +29,9 @@ body {
 .property-features {
     flex: 1 1 45%;
     box-sizing: border-box;
+    text-align: start;
+    padding-left: 20%;
+
 }
 
 .property-details {
@@ -33,12 +40,13 @@ body {
 }
 
 .property-features {
-    padding-left: 1rem;
+    padding-left: 20%;
+    text-align: start;
 }
 
 .property-carousel img {
     width: 100%;
-    height: auto;
+    height: 400px;
 }
 
 .carousel {

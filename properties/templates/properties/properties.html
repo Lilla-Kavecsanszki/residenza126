@@ -8,10 +8,8 @@
 
 {% block content %}
 <div class="container">
-    <h2 class="logo-font">Properties{% if current_locations %}
+    <h2 class="property-title">Properties{% if current_locations %}
         - {{ current_locations.0 }}
-        {% elif current_property_types %}
-        - {{ current_property_types.0 }}
         {% endif %}
     </h2>
     <hr/>

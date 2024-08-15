@@ -10,25 +10,8 @@
 {% block content %}
 <div class="container">
     <h2 class="property-title">{{ property.name }}</h2>
-    <p>Property Name: {{ property.name }}</p>
     <div class="row">
         <div class="col-md-12">
-            <div class="property-carousel">
-                {% if property.image %}
-                <div class="carousel">
-                    <div>
-                        <img src="{{ property.image.url }}" alt="{{ property.name }}">
-                    </div>
-                    {% for img in property.images.all %}
-                    <div>
-                        <img src="{{ img.image.url }}" alt="{{ property.name }}">
-                    </div>
-                    {% endfor %}
-                </div>
-                {% else %}
-                <p>No images available.</p>
-                {% endif %}
-            </div>
             <div class="property-info">
                 <div class="property-details">
                     <p><strong>Location:</strong> {{ property.location }}</p>
@@ -36,6 +19,7 @@
                     <p><strong>Type:</strong> {{ property.property_type }}</p>
                     <p><strong>Bedrooms:</strong> {{ property.bedrooms }}</p>
                     <p><strong>Bathrooms:</strong> {{ property.bathrooms }}</p>
+                    <p><strong>Name:</strong> {{ property.name }}</p>
                 </div>
                 <div class="property-features">
                     <h4>Features:</h4>
@@ -54,6 +38,23 @@
                 <h4>Description:</h4>
                 <p>{{ property.description }}</p>
             </div>
+            <div class="property-carousel">
+                {% if property.image %}
+                <div class="carousel">
+                    <div>
+                        <img src="{{ property.image.url }}" alt="{{ property.name }}">
+                    </div>
+                    {% for img in property.images.all %}
+                    <div>
+                        <img src="{{ img.image.url }}" alt="{{ property.name }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p>No images available.</p>
+                {% endif %}
+            </div>
+            
             <a href="{% url 'all_properties' %}" class="btn btn-primary">Back to Properties</a>
         </div>
     </div>
