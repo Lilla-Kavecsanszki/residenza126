@@ -1,52 +1,35 @@
-{% load static %}
+{% load static i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Building Oristano{% endblock %}</title>
+    <title>{% block title %}{% trans "Building Oristano" %}{% endblock %}</title>
+    
     <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Italiana&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <script src="https://kit.fontawesome.com/b4a11e6ad7.js" crossorigin="anonymous"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
-      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"
-    ></script>
+    
     <!-- Owl Carousel CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    
     <!-- Additional CSS from block -->
     {% block extra_css %}{% endblock %}
-
-    <!-- Additional JavaScript Files (If any) -->
-    {% block extra_js %}{% endblock %}
-
-    <!-- Other meta tags or links can go here -->
 </head>
 <body>
     <!-- Header Section -->
@@ -56,7 +39,7 @@
             <div class="col-lg-6 d-flex justify-content-start align-items-center">
                 <!-- Logo -->
                 <a href="{% url 'home' %}" class="nav-link main-logo-link logo">
-                    <img src="{% static 'media/logo.png' %}" alt="Logo" class="logo-image">
+                    <img src="{% static 'media/logo.png' %}" alt="{% trans 'Logo' %}" class="logo-image">
                 </a>
             </div>
             <div class="col-lg-6 d-flex justify-content-end">
@@ -64,7 +47,7 @@
                     <!-- Search Bar -->
                     <form method="GET" action="{% url 'all_properties' %}" class="w-100">
                         <div class="input-group w-100">
-                            <input class="form-control border-1 bg-transparent" type="text" name="q" placeholder="Search by Name" style="border-bottom: 1px solid #051c2c;">
+                            <input class="form-control border-1 bg-transparent" type="text" name="q" placeholder="{% trans 'Search by Name' %}" style="border-bottom: 1px solid #051c2c;">
                             <div class="input-group-append">
                                 <button class="form-control btn border-0" type="submit">
                                     <span class="icon"><i class="fas fa-search fa-lg" style="color: #051c2c;"></i></span>
@@ -77,45 +60,30 @@
                     <!-- Sign-In Link -->
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item dropdown">
-                            <a
-              class="text-black nav-link"
-              href="#"
-              id="user-options"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <div class="text-center icon">
-                {% if request.user.is_authenticated %}
-                <div><i class="fa-solid fa-user fa-lg"></i></div>
-                <p class="my-0">{{ user.username }}</p>
-                {% else %}
-                <div><i class="fa-regular fa-user fa-lg"></i></div>
-                <p class="my-0">Account</p>
-                {% endif %}
-              </div>
-            </a>
+                            <a class="text-black nav-link dropdown-toggle" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="text-center icon">
+                                    {% if request.user.is_authenticated %}
+                                    <div><i class="fa-solid fa-user fa-lg"></i></div>
+                                    <p class="my-0">{{ request.user.username }}</p>
+                                    {% else %}
+                                    <div><i class="fa-regular fa-user fa-lg"></i></div>
+                                    <p class="my-0">{% trans 'Account' %}</p>
+                                    {% endif %}
+                                </div>
+                            </a>
                             <div class="dropdown-menu border-0" aria-labelledby="user-options">
                                 {% if request.user.is_authenticated %}
                                 <!-- superuser -->
                                 {% if request.user.is_superuser %}
-                                <a href="#" class="dropdown-item"
-                                  >Product Management</a
-                                >
+                                <a href="#" class="dropdown-item">{% trans 'Product Management' %}</a>
                                 {% endif %}
-                                <a href="#" class="dropdown-item">My Profile</a>
-                                <a href="{% url 'account_logout' %}" class="dropdown-item"
-                                  >Logout</a
-                                >
+                                <a href="#" class="dropdown-item">{% trans 'My Profile' %}</a>
+                                <a href="{% url 'account_logout' %}" class="dropdown-item">{% trans 'Logout' %}</a>
                                 {% else %}
-                                <a href="{% url 'account_signup' %}" class="dropdown-item"
-                                  >Register</a
-                                >
-                                <a href="{% url 'account_login' %}" class="dropdown-item"
-                                  >Login</a
-                                >
+                                <a href="{% url 'account_signup' %}" class="dropdown-item">{% trans 'Register' %}</a>
+                                <a href="{% url 'account_login' %}" class="dropdown-item">{% trans 'Login' %}</a>
                                 {% endif %}
-                              </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -126,13 +94,13 @@
                             <a class="text-black nav-link dropdown-toggle" href="#" id="language-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="text-center icon">
                                     <i class="fas fa-globe fa-lg"></i>
-                                    <p class="my-0">EN</p> <!-- Changes to current language -->
+                                    <p class="my-0">{% trans 'EN' %}</p> <!-- Shows current language -->
                                 </div>
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="language-options">
-                                <a href="#" class="dropdown-item">EN</a>
-                                <a href="#" class="dropdown-item">IT</a>
-                                <a href="#" class="dropdown-item">DE</a>
+                                <a href="{% url 'language_switch' 'en' %}" class="dropdown-item">{% trans 'EN' %}</a>
+                                <a href="{% url 'language_switch' 'it' %}" class="dropdown-item">{% trans 'IT' %}</a>
+                                <a href="{% url 'language_switch' 'de' %}" class="dropdown-item">{% trans 'DE' %}</a>
                             </div>
                         </li>
                     </ul>
@@ -152,20 +120,20 @@
                             <p class="my-0">{{ request.user.username }}</p>
                             {% else %}
                             <div><i class="fa-regular fa-user fa-lg"></i></div>
-                            <p class="my-0">Account</p>
+                            <p class="my-0">{% trans 'Account' %}</p>
                             {% endif %}
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-center border-0" aria-labelledby="user-options-mobile">
                         {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser %}
-                        <a href="#" class="dropdown-item">Property Management</a>
+                        <a href="#" class="dropdown-item">{% trans 'Property Management' %}</a>
                         {% endif %}
-                        <a href="#" class="dropdown-item">My Profile</a>
-                        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                        <a href="#" class="dropdown-item">{% trans 'My Profile' %}</a>
+                        <a href="{% url 'account_logout' %}" class="dropdown-item">{% trans 'Logout' %}</a>
                         {% else %}
-                        <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                        <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                        <a href="{% url 'account_signup' %}" class="dropdown-item">{% trans 'Register' %}</a>
+                        <a href="{% url 'account_login' %}" class="dropdown-item">{% trans 'Login' %}</a>
                         {% endif %}
                     </div>
                 </li>
@@ -175,13 +143,13 @@
                     <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="text-center">
                             <div><i class="fas fa-search fa-lg"></i></div>
-                            <p class="my-0">Search</p>
+                            <p class="my-0">{% trans 'Search' %}</p>
                         </div>
                     </a>
                     <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
                         <form class="form" method="GET" action="#">
                             <div class="input-group w-100">
-                                <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site" />
+                                <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="{% trans 'Search our site' %}" />
                                 <div class="input-group-append">
                                     <button class="form-control form-control btn btn-black border border-black rounded-0" type="submit">
                                         <span class="icon">
@@ -193,18 +161,19 @@
                         </form>
                     </div>
                 </li>
+                
                 <!-- Mobile Language Dropdown -->
                 <li class="list-inline-item dropdown">
                     <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-language" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="text-center">
                             <i class="fas fa-globe fa-lg"></i>
-                            <p class="my-0">EN</p> <!-- Changes to current language -->
+                            <p class="my-0">{% trans 'EN' %}</p> <!-- Changes to current language -->
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-center border-0" aria-labelledby="mobile-language">
-                        <a href="#" class="dropdown-item">EN</a>
-                        <a href="#" class="dropdown-item">IT</a>
-                        <a href="#" class="dropdown-item">DE</a>
+                        <a href="{% url 'language_switch' 'en' %}" class="dropdown-item">{% trans 'EN' %}</a>
+                        <a href="{% url 'language_switch' 'it' %}" class="dropdown-item">{% trans 'IT' %}</a>
+                        <a href="{% url 'language_switch' 'de' %}" class="dropdown-item">{% trans 'DE' %}</a>
                     </div>
                 </li>
             </ul>
@@ -213,28 +182,28 @@
         <!-- Navigation Bar -->
         <div class="row nav-background">
             <nav class="navbar navbar-expand-lg w-100 col-lg-12 justify-content-end d-flex">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="{% trans 'Toggle navigation' %}">
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="main-nav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+                            <a class="nav-link" href="{% url 'admin:index' %}">{% trans 'Admin' %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                            <a class="nav-link" href="{% url 'home' %}">{% trans 'Home' %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'all_properties' %}">Properties</a>
+                            <a class="nav-link" href="{% url 'all_properties' %}">{% trans 'Properties' %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'construction' %}">Construction</a>
+                            <a class="nav-link" href="{% url 'construction' %}">{% trans 'Construction' %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}#about">About</a>
+                            <a class="nav-link" href="{% url 'home' %}#about">{% trans 'About' %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contact_us' %}">Contact</a>
+                            <a class="nav-link" href="{% url 'contact_us' %}">{% trans 'Contact' %}</a>
                         </li>
                     </ul>
                 </div>
@@ -251,21 +220,28 @@
         </div>
     </main>
 
-    {% block extra_scripts %}{% endblock %}
+    <!-- Additional JavaScript Files (If any) -->
+    {% block extra_js %}{% endblock %}
 
     <!-- Footer Section -->
     <footer class="footer-cover text-white text-center py-4">
         <div class="footer-content">
-            <p>Follow us on social media:</p>
+            <p>{% trans 'Follow us on social media:' %}</p>
             <p class="socials">
                 <a class="links facebook" href="https://www.facebook.com/buildingsardinia"><i class="fab fa-facebook-f icon"></i></a>
                 <a class="links linkedin" href="https://www.linkedin.com/buildingsardinia"><i class="fab fa-linkedin-in icon"></i></a>
                 <a class="links insta" href="https://www.instagram.com/buildingsardinia"><i class="fab fa-instagram icon"></i></a>
             </p>
-            <p>&copy; 2024 Building Sardinia. All rights reserved.</p>
+            <p>&copy; 2024 {% trans 'Building Sardinia. All rights reserved.' %}</p>
         </div>
     </footer>
 
+    <!-- JavaScript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>
-
