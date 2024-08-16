@@ -107,15 +107,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us'  # Default language
 TIME_ZONE = env('TIME_ZONE', default='Europe/Rome')
+
 USE_I18N = True
 USE_TZ = True
 
 LANGUAGES = [
-    ('en', _('English')),
-    ('it', _('Italian')),
-    ('de', _('German')),
+    ('en', _('English')),   # English
+    ('it', _('Italian')),   # Italian
+    ('de', _('German')),    # German
 ]
 
 LOCALE_PATHS = [
