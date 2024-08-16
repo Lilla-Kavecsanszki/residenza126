@@ -76,23 +76,23 @@
             {% for property in properties %}
             <div class="col-12 col-sm-6 col-md-4 mb-4">
                 <div class="card h-100 border-0">
-                    {% if property.video %}
+                    {% if property.main_video %}
                     <!-- Render video if available -->
                     <a href="{% url 'property_detail' property.id %}">
                         <video class="card-img-top img-fluid" autoplay muted loop>
-                            <source src="{{ property.video.url }}" type="video/mp4">
+                            <source src="{{ property.main_video.url }}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </a>
-                    {% elif property.image %}
+                    {% elif property.main_image %}
                     <!-- Render image if video is not available -->
                     <a href="{% url 'property_detail' property.id %}">
-                        <img class="card-img-top img-fluid" src="{{ property.image.url }}" alt="{{ property.name }}">
+                        <img class="card-img-top img-fluid" src="{{ property.main_image.url }}" alt="{{ property.name }}">
                     </a>
                     {% else %}
                     <!-- Fallback image if neither video nor image is available -->
                     <a href="{% url 'property_detail' property.id %}">
-                        <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ property.name }}">
+                        <img class="card-img-top img-fluid" src="{% static 'media/noimage.png' %}" alt="{{ property.name }}">
                     </a>
                     {% endif %}
                     <div class="card-body pb-0">

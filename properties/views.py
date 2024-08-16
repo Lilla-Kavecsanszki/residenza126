@@ -85,6 +85,9 @@ def property_detail(request, property_id):
     property = get_object_or_404(Property, pk=property_id)
     context = {
         'property': property,
+        'images': property.images.all(),  # Fetch related images
+        'videos': property.videos.all(),  # Fetch related videos
     }
     return render(request, 'properties/property_details.html', context)
+
 
