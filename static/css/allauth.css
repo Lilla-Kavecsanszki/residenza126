@@ -1,57 +1,140 @@
-/* Login page */
-
-.login {
-    background-color: red;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(5, 28, 44, 0.1);
-    margin: 2em auto;
-    max-width: 400px;
+body {
+    font-family: "Cormorant Garamond", serif;
+    background-color: #f9f9f9; /* Light background for better contrast */
+    color: #051c2c;
 }
 
-form.login .form-group {
+/* Container and Row Layout */
+.container-fluid {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.full-width-row {
+    display: flex;
+    width: 100%;
+}
+
+/* Flexbox Columns */
+.left-content, .right-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    padding: 20px;
+}
+
+.col-md-6 {
+    flex: 1; /* Ensure columns take up equal space */
+}
+
+/* Logo and Headings */
+.logo-font {
+    color: #051c2c;
+    font-family: "Italiana", sans-serif;
+    /* text-transform: uppercase;  */
+    margin-bottom: 1em;
+    font-size: 2.5em;         
+    font-weight: 600;
+}
+
+.signup {
+    text-decoration: underline;
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for both zoom and color changes */
+}
+
+.signup:hover {
+    transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+/* Form Styles */
+.form {
+    background-color: #051c2c;
+    padding: 2em;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Adjusted shadow for visibility */
+    border-radius: 5px; /* Rounded corners for better aesthetics */
+    margin: 1em auto; 
+    max-width: 600px;
+    color: #fff;
+    font-size: 1.1em;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between form elements */
+}
+
+.form .form-group {
     margin-bottom: 1.5em;
 }
 
-form.login .form-control {
-    border-radius: 5px;
+.form .form-control {
+    border-radius: 2px;
     border: 1px solid #ddd;
     padding: 0.75em;
     box-shadow: none;
     font-size: 1em;
-    color: #051c2c;
+    color: #051c2c; 
 }
 
-form.login .form-control:focus {
-    border-color: #051c2c;
-    box-shadow: 0 0 5px rgba(5, 28, 44, 0.2);
+.form .form-control:focus {
+    border-color: #fff;
+    box-shadow: 0 0 0 3px rgba(221, 221, 221, 0.5);
 }
 
-form.login .form-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-form.login .primaryAction {
+/* Button Styles */
+.btn.home-button {
+    display: inline-block;
     background-color: #051c2c;
     color: #fff;
-    border: none;
+    border: 1px solid #051c2c;
     padding: 0.75em 1.5em;
     font-size: 1em;
+    border-radius: 5px; /* Rounded corners */
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    max-width: 150px; /* Set a maximum width */
+    overflow: hidden; /* Prevent text from overflowing */
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
+}
+
+/* Hover effect */
+.btn.home-button:hover {
+    background-color: #033b58;
+    color: #fff;
+    border-color: #033b58;
+}
+
+/* Focus effect */
+.btn.home-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(5, 28, 44, 0.3);
+}
+
+/* Form Actions */
+.form .primaryAction {
+    background-color: #051c2c;
+    color: white;
+    border: 3px solid white;
+    padding: 0.75em 1.5em;
+    font-size: 1em;
+    text-transform: uppercase;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-form.login .primaryAction:hover {
-    background-color: #033b58;
+.form .primaryAction:hover {
+    background-color: white;
+    color: #051c2c;
+    font-weight: bolder;
 }
 
-form.login .secondaryAction {
+.form .secondaryAction {
     background-color: transparent;
-    color: #051c2c;
-    border: 1px solid #051c2c;
+    color: white;
+    border: 1px solid white;
     padding: 0.75em 1.5em;
     font-size: 1em;
     border-radius: 5px;
@@ -59,28 +142,12 @@ form.login .secondaryAction {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-form.login .secondaryAction:hover {
+.form .secondaryAction:hover {
     background-color: #051c2c;
     color: #fff;
 }
 
-form.login .home-button {
-    background-color: transparent;
-    color: #051c2c;
-    border: 1px solid #051c2c;
-    padding: 0.75em 1.5em;
-    font-size: 1em;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-form.login .home-button:hover {
-    background-color: #051c2c;
-    color: #fff;
-}
-
-/* Social account buttons */
+/* Social Account Buttons */
 .socialaccount_providers {
     list-style: none;
     padding: 0;
@@ -125,7 +192,7 @@ form.login .home-button:hover {
     background-color: #0077b5;
 }
 
-/* Divider styles */
+/* Divider Styles */
 .login-or {
     text-align: center;
     margin: 1.5em 0;
@@ -134,7 +201,7 @@ form.login .home-button:hover {
     font-weight: bold;
 }
 
-/* Error messages */
+/* Error Messages */
 .errorlist {
     color: #d9534f;
     margin-bottom: 1em;
@@ -149,7 +216,7 @@ form.login .home-button:hover {
     margin-right: 0.5em;
 }
 
-/* Additional helper text */
+/* Additional Helper Text */
 .login-margin {
     margin-top: 1.5em;
     text-align: center;
@@ -166,9 +233,9 @@ form.login .home-button:hover {
     text-decoration: underline;
 }
 
-/* Responsive styling */
+/* Responsive Styling */
 @media (max-width: 576px) {
-    form.login {
+    .form {
         padding: 1.5em;
         margin: 1.5em;
     }
