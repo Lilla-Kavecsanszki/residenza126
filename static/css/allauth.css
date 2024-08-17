@@ -1,0 +1,183 @@
+/* Login page */
+
+.login {
+    background-color: red;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(5, 28, 44, 0.1);
+    margin: 2em auto;
+    max-width: 400px;
+}
+
+form.login .form-group {
+    margin-bottom: 1.5em;
+}
+
+form.login .form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0.75em;
+    box-shadow: none;
+    font-size: 1em;
+    color: #051c2c;
+}
+
+form.login .form-control:focus {
+    border-color: #051c2c;
+    box-shadow: 0 0 5px rgba(5, 28, 44, 0.2);
+}
+
+form.login .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form.login .primaryAction {
+    background-color: #051c2c;
+    color: #fff;
+    border: none;
+    padding: 0.75em 1.5em;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form.login .primaryAction:hover {
+    background-color: #033b58;
+}
+
+form.login .secondaryAction {
+    background-color: transparent;
+    color: #051c2c;
+    border: 1px solid #051c2c;
+    padding: 0.75em 1.5em;
+    font-size: 1em;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+form.login .secondaryAction:hover {
+    background-color: #051c2c;
+    color: #fff;
+}
+
+form.login .home-button {
+    background-color: transparent;
+    color: #051c2c;
+    border: 1px solid #051c2c;
+    padding: 0.75em 1.5em;
+    font-size: 1em;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+form.login .home-button:hover {
+    background-color: #051c2c;
+    color: #fff;
+}
+
+/* Social account buttons */
+.socialaccount_providers {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5em;
+}
+
+.socialaccount_providers li {
+    flex: 1;
+    margin: 0 0.5em;
+}
+
+.socialaccount_providers a {
+    display: block;
+    padding: 0.75em;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.socialaccount_providers a:hover {
+    opacity: 0.8;
+}
+
+.socialaccount_providers .provider-facebook {
+    background-color: #3b5998;
+}
+
+.socialaccount_providers .provider-google {
+    background-color: #db4437;
+}
+
+.socialaccount_providers .provider-twitter {
+    background-color: #1da1f2;
+}
+
+.socialaccount_providers .provider-linkedin {
+    background-color: #0077b5;
+}
+
+/* Divider styles */
+.login-or {
+    text-align: center;
+    margin: 1.5em 0;
+    color: #051c2c;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Error messages */
+.errorlist {
+    color: #d9534f;
+    margin-bottom: 1em;
+}
+
+.errorlist li {
+    list-style: none;
+}
+
+.errorlist li::before {
+    content: "⚠";
+    margin-right: 0.5em;
+}
+
+/* Additional helper text */
+.login-margin {
+    margin-top: 1.5em;
+    text-align: center;
+    font-size: 0.9em;
+    color: #051c2c;
+}
+
+.login-margin a {
+    color: #051c2c;
+    text-decoration: none;
+}
+
+.login-margin a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive styling */
+@media (max-width: 576px) {
+    form.login {
+        padding: 1.5em;
+        margin: 1.5em;
+    }
+
+    .socialaccount_providers {
+        flex-direction: column;
+    }
+
+    .socialaccount_providers li {
+        margin: 0.5em 0;
+    }
+}

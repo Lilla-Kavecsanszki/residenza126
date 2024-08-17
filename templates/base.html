@@ -63,10 +63,10 @@
                             <a class="text-black nav-link dropdown-toggle" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="text-center icon">
                                     {% if request.user.is_authenticated %}
-                                    <div><i class="fa-solid fa-user fa-lg"></i></div>
+                                    <div><i class="fas fa-solid fa-user fa-lg" style="color: #051c2c;"></i></div>
                                     <p class="my-0">{{ request.user.username }}</p>
                                     {% else %}
-                                    <div><i class="fa-regular fa-user fa-lg"></i></div>
+                                    <div><i class="far fa-regular fa-user fa-lg" style="color: #051c2c;"></i></i></div>
                                     <p class="my-0">{% trans 'Account' %}</p>
                                     {% endif %}
                                 </div>
@@ -100,7 +100,6 @@
                             <div class="dropdown-menu border-0" aria-labelledby="language-options">
                                 <a href="{% url 'language_switch' 'en' %}" class="dropdown-item">{% trans 'EN' %}</a>
                                 <a href="{% url 'language_switch' 'it' %}" class="dropdown-item">{% trans 'IT' %}</a>
-                                <a href="{% url 'language_switch' 'de' %}" class="dropdown-item">{% trans 'DE' %}</a>
                             </div>
                         </li>
                     </ul>
@@ -173,7 +172,6 @@
                     <div class="dropdown-menu dropdown-menu-center border-0" aria-labelledby="mobile-language">
                         <a href="{% url 'language_switch' 'en' %}" class="dropdown-item">{% trans 'EN' %}</a>
                         <a href="{% url 'language_switch' 'it' %}" class="dropdown-item">{% trans 'IT' %}</a>
-                        <a href="{% url 'language_switch' 'de' %}" class="dropdown-item">{% trans 'DE' %}</a>
                     </div>
                 </li>
             </ul>
