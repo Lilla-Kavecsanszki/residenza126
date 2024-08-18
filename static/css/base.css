@@ -605,17 +605,13 @@ footer a .icon {
         max-width: 400px;
     }
 
-    /* Star sign - Gold shimmer - https: //codepen.io/Amarjit/pen/mrbjNy */
 
-    /* Star sign - Gold shimmer */
-
-/* Star sign - Gold shimmer */
-
-.fa-star {
+/* Star sign - Gold shimmer - https: //codepen.io/Amarjit/pen/mrbjNy */
+.fa-star-base {
     color: #daa520;
 }
 
-.light {
+.light-base {
     display: inline-block;
     background: linear-gradient(
         135deg,

@@ -75,7 +75,7 @@
         <div class="row">
             {% for property in properties %}
             <div class="col-12 col-sm-6 col-md-4 mb-4">
-                <div class="card h-100 border-0">
+                <div class="card h-100 border-0 property-card">
                     {% if property.main_video %}
                     <!-- Render video if available -->
                     <a href="{% url 'property_detail' property.id %}">
@@ -120,7 +120,7 @@
                                             </p>
                                             {% endif %}
                                         </div>
-                                
+                                    
                                         <!-- Right Column: Bedrooms and Bathrooms -->
                                         <div class="col-6">
                                             {% if property.bedrooms %}
@@ -135,30 +135,23 @@
                                             {% endif %}
                                         </div>
                                     </div>
-                                </div>
-                                                                
+                                </div>   
                             </div>
                         </div>
                     </div>
                     <!-- Like Button -->
-<div class="like-container">
-    {% if user.is_authenticated %}
-        <form action="{% url 'like_property' property.id %}" method="post" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-link" style="border: none; background: none; padding: 0;">
-                <i class="far fa-star fa-flip" id="like-icon-{{ property.id }}" 
-                   {% if user in property.liked_by.all %} 
-                   style="color: gold;"
-                   {% endif %}>
-                </i>
-            </button>
-        </form>
-    {% else %}
-        <i class="far fa-star fa-flip" id="like-icon-{{ property.id }}" onclick="showLoginPrompt()"></i>
-    {% endif %}
-</div>
-
-                    
+                    <div class="like-container">
+                        {% if user.is_authenticated %}
+                            <form action="{% url 'like_property' property.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link" style="border: none; background: none; padding: 0;">
+                                    <i class="fa-star like {% if user in property.liked_by.all %}fas light-base{% else %}far{% endif %}" id="like-icon-{{ property.id }}"></i>
+                                </button>
+                            </form>
+                        {% else %}
+                            <i class="far fa-star like" id="like-icon-{{ property.id }}" onclick="showLoginPrompt()"></i>
+                        {% endif %}
+                    </div>                    
                 </div>
             </div>
             {% if forloop.counter|divisibleby:3 and not forloop.last %}
@@ -204,8 +197,27 @@
         });
     });
 
+    document.addEventListener("DOMContentLoaded", function() {
+        // Handle like button click
+        document.querySelectorAll('.like-container i').forEach(icon => {
+            icon.addEventListener('click', function() {
+                // Check if the icon is currently filled or outlined
+                const isFilled = this.classList.contains('fas');
+                
+                if (isFilled) {
+                    this.classList.remove('fas');
+                    this.classList.add('far');
+                } else {
+                    this.classList.remove('far');
+                    this.classList.add('fas');
+                }
+            });
+        });
+    });
+    
     function showLoginPrompt() {
         alert('Please log in to add a property to your favourites.');
     }
+    
 </script>
 {% endblock %}

@@ -224,12 +224,13 @@ h1, h2 {
 }
 
 /* Like button */
-
+/* Property Card */
 .property-card {
     position: relative;
     /* Other styles for the property card */
 }
 
+/* Like Container */
 .like-container {
     position: absolute;
     bottom: 10px;
@@ -237,18 +238,16 @@ h1, h2 {
     z-index: 10; /* Ensure it appears above other content */
 }
 
-.like-container .fa-star {
+.like {
     cursor: pointer;
-    font-size: 1.5em;
-    color: #daa520; /* Default color */
+    font-size: 1.5em; 
+    color: #daa520; 
+    transition: color 0.3s ease; /* Smooth color transition */
 }
 
-.like-container .fa-star:hover {
-    color: #f7ef8a; /* Color change on hover */
-}
-
-/* Add shimmer effect CSS */
-.light {
+/* Base shimmer effect */
+.fa-star-base {
+    display: inline-block;
     background: linear-gradient(
         135deg,
         #daa520 0%,
@@ -257,20 +256,48 @@ h1, h2 {
         #daa520 60%,
         #daa520 100%
     );
-    background-size: 300%;
-    background-repeat: no-repeat;
-    animation: light 1s infinite;
+    background-size: 200%;
+    background-position: -200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.5s infinite;
 }
 
-@keyframes light {
+/* Shimmer animation */
+@keyframes shimmer {
     0% {
-        background-position: -600px;
+        background-position: -200%;
     }
     100% {
-        background-position: 0px;
+        background-position: 200%;
     }
 }
 
+/* Default star color */
+.fa-star {
+    color: #daa520; /* Default color for the star */
+    position: relative;
+}
+
+/* Shimmer effect on hover */
+.fa-star:hover,
+.fa-star.light-base {
+    background: linear-gradient(
+        135deg,
+        #daa520 0%,
+        #daa520 40%,
+        #ffffff 50%,
+        #daa520 60%,
+        #daa520 100%
+    );
+    background-size: 200%;
+    background-position: -200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.5s infinite;
+}
 
 /* Help button styles */
 .help-button {
