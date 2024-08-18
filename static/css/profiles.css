@@ -6,8 +6,7 @@ body {
 
 .container {
     padding: 2em;
-    margin-top: 14%;
-    max-width: 1200px;
+    margin-top: 12%
 }
 
 /* Heading Styles */
@@ -15,6 +14,115 @@ h1, h2 {
     text-align: center;
     font-family: "Italiana", sans-serif;
     color: #fff;
-    font-size: 2.5em;          /* Larger font size for a bold presence */
     font-weight: 400;
+}
+
+h1 {
+    font-size: 2.5em; /* Larger font size for a bold presence */
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 2em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #555;
+}
+
+/* Profile Info */
+.profile-info p {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+.profile-info strong {
+    color: #007bff; /* Blue color for emphasis */
+}
+
+/* Phone Form */
+.phone-form {
+    margin-top: 1em;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.phone-form .form-group {
+    margin-bottom: 1em;
+}
+
+.phone-form label {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+}
+
+.phone-form .form-control {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.phone-form .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.75em 1.5em;
+    font-size: 1em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.phone-form .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Liked Properties */
+.liked-properties {
+    list-style-type: none;
+    padding: 0;
+}
+
+.liked-properties li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 1em;
+    border-radius: 4px;
+    margin-bottom: 0.5em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1em;
+    }
+
+    .container.profile-container {
+        padding: 1em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .profile-info p {
+        font-size: 1em;
+    }
+
+    .phone-form .form-control {
+        font-size: 0.9em;
+    }
+
+    .phone-form .btn-primary {
+        padding: 0.5em 1em;
+        font-size: 0.9em;
+    }
 }

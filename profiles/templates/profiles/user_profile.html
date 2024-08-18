@@ -7,17 +7,43 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-<h1>Profile of {{ user.username }}</h1>
-<p>Email: {{ user.email }}</p>
-<p>Phone Number: {{ profile.default_phone_number|default:"Not provided" }}</p>
-<h2>Liked Properties</h2>
-<ul>
-    {% for property in liked_properties %}
-        <li>{{ property.name }} - {{ property.location }}</li>
-    {% empty %}
-        <li>No liked properties.</li>
-    {% endfor %}
-</ul>
+<div class="container my-5">
+    <div class="row">
+        <!-- Left Side -->
+        <div class="col-md-6 mb-4">
+            <div class="card p-4">
+                <h1 class="card-title">Profile of {{ user.username }}</h1>
+                <div class="profile-info mb-3">
+                    <p>Email: <strong>{{ user.email }}</strong></p>
+                    <p>Phone Number: <strong>{{ profile.default_phone_number|default:"Not provided" }}</strong></p>
+                </div>
+
+                <h2>Update Phone Number</h2>
+                <form method="post" action="{% url 'update_phone_number' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.default_phone_number.label_tag }}
+                        {{ form.default_phone_number }}
+                        {{ form.default_phone_number.errors }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h2>Liked Properties</h2>
+                <ul class="list-group">
+                    {% for property in liked_properties %}
+                        <li class="list-group-item">{{ property.name }} - {{ property.location }}</li>
+                    {% empty %}
+                        <li class="list-group-item">No liked properties.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
