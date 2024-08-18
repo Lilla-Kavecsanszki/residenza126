@@ -223,6 +223,54 @@ h1, h2 {
     }
 }
 
+/* Like button */
+
+.property-card {
+    position: relative;
+    /* Other styles for the property card */
+}
+
+.like-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10; /* Ensure it appears above other content */
+}
+
+.like-container .fa-star {
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #daa520; /* Default color */
+}
+
+.like-container .fa-star:hover {
+    color: #f7ef8a; /* Color change on hover */
+}
+
+/* Add shimmer effect CSS */
+.light {
+    background: linear-gradient(
+        135deg,
+        #daa520 0%,
+        #daa520 40%,
+        #ffffff 50%,
+        #daa520 60%,
+        #daa520 100%
+    );
+    background-size: 300%;
+    background-repeat: no-repeat;
+    animation: light 1s infinite;
+}
+
+@keyframes light {
+    0% {
+        background-position: -600px;
+    }
+    100% {
+        background-position: 0px;
+    }
+}
+
 
 /* Help button styles */
 .help-button {

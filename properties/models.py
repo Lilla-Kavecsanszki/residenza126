@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Property(models.Model):
     PROPERTY_TYPES = [
@@ -14,6 +15,7 @@ class Property(models.Model):
         ('Nolosodove', 'Nolosodove'),
         # Add other locations as needed
     ]
+
     name = models.CharField(max_length=255, default='')
     description = models.TextField(default='')
     features = models.TextField(default='')
@@ -26,14 +28,22 @@ class Property(models.Model):
     size = models.PositiveIntegerField()
 
     location = models.CharField(max_length=100, choices=LOCATIONS, default='Oristano')
-    property_type = models.CharField(max_length=50, choices=PROPERTY_TYPES, default='House')   
+    property_type = models.CharField(max_length=50, choices=PROPERTY_TYPES, default='House')
+
+    # Adding a ManyToManyField to track which users have liked this property
+    liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_properties', blank=True)
 
     def __str__(self):
         return self.name
-    
+
+    def number_of_likes(self):
+        """Returns the number of users who liked this property."""
+        return self.liked_by.count()
+
     class Meta:
         verbose_name = "Property"
         verbose_name_plural = "Properties"
+        ordering = ['-created_at']  # Default ordering: most recent first
 
 
 class PropertyImage(models.Model):
@@ -50,3 +60,4 @@ class PropertyVideo(models.Model):
 
     def __str__(self):
         return f"Video for {self.property.name}"
+    

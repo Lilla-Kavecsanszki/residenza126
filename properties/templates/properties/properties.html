@@ -140,6 +140,24 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Like Button -->
+<div class="like-container">
+    {% if user.is_authenticated %}
+        <form action="{% url 'like_property' property.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-link" style="border: none; background: none; padding: 0;">
+                <i class="far fa-star fa-flip" id="like-icon-{{ property.id }}" 
+                   {% if user in property.liked_by.all %} 
+                   style="color: gold;"
+                   {% endif %}>
+                </i>
+            </button>
+        </form>
+    {% else %}
+        <i class="far fa-star fa-flip" id="like-icon-{{ property.id }}" onclick="showLoginPrompt()"></i>
+    {% endif %}
+</div>
+
                     
                 </div>
             </div>
@@ -165,16 +183,15 @@
 {{ block.super }}
 
 <script type="text/javascript">
-    // Ensure the script runs after the DOM is fully loaded
     document.addEventListener("DOMContentLoaded", function() {
-        // Attach the event listener to the sort selector
-        $('#sort-selector').change(function () {
-            var selector = $(this);
-            var currentUrl = new URL(window.location.href);  // Use window.location.href for older browsers
+        // Handle sort selector change
+        document.getElementById('sort-selector').addEventListener('change', function () {
+            var selector = this;
+            var currentUrl = new URL(window.location.href);
 
-            var selectedVal = selector.val();
+            var selectedVal = selector.value;
             if (selectedVal !== "reset") {
-                var [sort, direction] = selectedVal.split("_");  // Destructuring assignment
+                var [sort, direction] = selectedVal.split("_");
 
                 currentUrl.searchParams.set("sort", sort);
                 currentUrl.searchParams.set("direction", direction);
@@ -183,9 +200,12 @@
                 currentUrl.searchParams.delete("direction");
             }
 
-            // Redirect to the new URL
             window.location.replace(currentUrl);
         });
     });
+
+    function showLoginPrompt() {
+        alert('Please log in to add a property to your favourites.');
+    }
 </script>
 {% endblock %}

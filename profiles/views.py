@@ -1,28 +1,22 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib import messages
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from .models import UserProfile
-from .forms import UserProfileForm
 
 @login_required
-def profile(request):
-    """ Display and update the user's profile. """
-    profile = get_object_or_404(UserProfile, user=request.user)
-
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Profile updated successfully.')
-            return redirect('profile')  # Redirect to avoid resubmission on refresh
-        else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')
-    else:
-        form = UserProfileForm(instance=profile)
+def user_profile(request):
+    """A view to show the user's profile with login details."""
+    user = request.user
+    try:
+        profile = UserProfile.objects.get(user=user)
+    except UserProfile.DoesNotExist:
+        # Create a profile if it does not exist
+        profile = UserProfile.objects.create(user=user)
 
     context = {
-        'form': form,
-        'on_profile_page': True  # Used to potentially style the profile page differently
+        'user': user,
+        'profile': profile,
+        'liked_properties': profile.liked_properties.all(),
     }
 
-    return render(request, 'profiles/profile.html', context)
+    return render(request, 'profiles/user_profile.html', context)

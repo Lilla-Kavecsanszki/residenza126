@@ -4,10 +4,10 @@
         <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options-mobile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="text-center">
                 {% if request.user.is_authenticated %}
-                <div><i class="fa-solid fa-user fa-lg"></i></div>
+                <div><i class="fas fa-user fa-lg"></i></div>
                 <p class="my-0">{{ request.user.username }}</p>
                 {% else %}
-                <div><i class="fa-regular fa-user fa-lg"></i></div>
+                <div><i class="far fa-user fa-lg"></i></div>
                 <p class="my-0">{% trans "Account" %}</p>
                 {% endif %}
             </div>
@@ -15,9 +15,12 @@
         <div class="dropdown-menu dropdown-menu-center border-0" aria-labelledby="user-options-mobile">
             {% if request.user.is_authenticated %}
             {% if request.user.is_superuser %}
-            <a href="#" class="dropdown-item">{% trans "Product Management" %}</a>
+            <a href="#" class="dropdown-item">{% trans "Property Management" %}</a>
             {% endif %}
-            <a href="#" class="dropdown-item">{% trans "My Profile" %}</a>
+            <a href="{% url 'user_profile' %}" class="dropdown-item">
+                {% trans 'My Favourites' %} 
+                <i class="fas fa-star light"></i>
+            </a>
             <a href="{% url 'account_logout' %}" class="dropdown-item">{% trans "Logout" %}</a>
             {% else %}
             <a href="{% url 'account_signup' %}" class="dropdown-item">{% trans "Register" %}</a>
@@ -35,9 +38,9 @@
             </div>
         </a>
         <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
-            <form class="form" method="GET" action="{% url 'products' %}">
+            <form class="form" method="GET" action="{% url 'all_properties' %}">
                 <div class="input-group w-100">
-                    <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="{% trans 'Search our site' %}" />
+                    <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="{% trans 'Search by Name' %}" />
                     <div class="input-group-append">
                         <button class="form-control form-control btn btn-black border border-black rounded-0" type="submit">
                             <span class="icon">

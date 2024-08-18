@@ -75,9 +75,12 @@
                                 {% if request.user.is_authenticated %}
                                 <!-- superuser -->
                                 {% if request.user.is_superuser %}
-                                <a href="#" class="dropdown-item">{% trans 'Product Management' %}</a>
+                                <a href="#" class="dropdown-item">{% trans 'Property Management' %}</a>
                                 {% endif %}
-                                <a href="#" class="dropdown-item">{% trans 'My Profile' %}</a>
+                                <a href="{% url 'user_profile' %}" class="dropdown-item">
+                                    {% trans 'My Favourites' %} 
+                                    <i class="fas fa-star light"></i>
+                                </a>
                                 <a href="{% url 'account_logout' %}" class="dropdown-item">{% trans 'Logout' %}</a>
                                 {% else %}
                                 <a href="{% url 'account_signup' %}" class="dropdown-item">{% trans 'Register' %}</a>
@@ -128,7 +131,10 @@
                         {% if request.user.is_superuser %}
                         <a href="#" class="dropdown-item">{% trans 'Property Management' %}</a>
                         {% endif %}
-                        <a href="#" class="dropdown-item">{% trans 'My Profile' %}</a>
+                        <a href="{% url 'user_profile' %}" class="dropdown-item">
+                            {% trans 'My Favourites' %} 
+                            <i class="fas fa-star light"></i>
+                        </a>
                         <a href="{% url 'account_logout' %}" class="dropdown-item">{% trans 'Logout' %}</a>
                         {% else %}
                         <a href="{% url 'account_signup' %}" class="dropdown-item">{% trans 'Register' %}</a>

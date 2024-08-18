@@ -10,7 +10,7 @@ class PropertyVideoInline(admin.TabularInline):
     extra = 1  # Number of extra forms to display for adding videos
 
 class PropertyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'location', 'property_type', 'price', 'size', 'bedrooms', 'bathrooms', 'created_at')
+    list_display = ('name', 'location', 'property_type', 'price', 'size', 'bedrooms', 'bathrooms', 'created_at', 'number_of_likes')
     list_filter = ('location', 'property_type', 'bedrooms', 'bathrooms', 'created_at')
     search_fields = ('name', 'description', 'location', 'property_type')
     ordering = ('-created_at',)
@@ -24,12 +24,16 @@ class PropertyAdmin(admin.ModelAdmin):
         ('Details', {
             'fields': ('bedrooms', 'bathrooms')
         }),
+        ('Likes', {
+            'fields': ('liked_by',),
+            'classes': ('collapse',),  # This hides the fieldset by default
+        }),
     )
     inlines = [PropertyImageInline, PropertyVideoInline]  # Add this line to include inlines
 
-    # Overriding the save method (if needed, otherwise, you can remove this)
-    def save_model(self, request, obj, form, change):
-        obj.save()
+    def number_of_likes(self, obj):
+        return obj.number_of_likes()
+    number_of_likes.short_description = 'Number of Likes'
 
 # Register the model with the customized admin
 admin.site.register(Property, PropertyAdmin)

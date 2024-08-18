@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'residenza',
     'properties',
-    'profiles',
+    'profiles.apps.ProfilesConfig',
     'contact',
     'construction',
     'crispy_forms',

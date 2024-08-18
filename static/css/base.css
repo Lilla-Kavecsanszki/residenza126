@@ -604,3 +604,40 @@ footer a .icon {
         margin: 2em auto;
         max-width: 400px;
     }
+
+    /* Star sign - Gold shimmer - https: //codepen.io/Amarjit/pen/mrbjNy */
+
+    /* Star sign - Gold shimmer */
+
+/* Star sign - Gold shimmer */
+
+.fa-star {
+    color: #daa520;
+}
+
+.light {
+    display: inline-block;
+    background: linear-gradient(
+        135deg,
+        #daa520 0%,
+        #daa520 40%,
+        #ffffff 50%,
+        #daa520 60%,
+        #daa520 100%
+    );
+    background-size: 200%;
+    background-position: -200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200%;
+    }
+    100% {
+        background-position: 200%;
+    }
+}
