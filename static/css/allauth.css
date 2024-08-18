@@ -311,3 +311,64 @@ body {
     flex-direction: column;
     gap: 10px; /* Space between form elements */
 }
+
+/* Logout page */
+
+.signout {
+    color: #fff;
+}
+
+/* Center Text */
+.logouter-form h2,
+.logouter-form p {
+    text-align: center;
+}
+
+/* Sign Out Form */
+.logout-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+    margin-top: 20px; /* Space above buttons */
+}
+
+/* Button Styles */
+.primaryAction,
+.home-button {
+    background-color: #051c2c;
+    color: white;
+    border: 3px solid white;
+    padding: 0.75em 1.5em;
+    font-size: 1em;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%; /* Make buttons responsive */
+}
+
+.primaryAction:hover,
+.home-button:hover {
+    background-color: white;
+    color: #051c2c;
+    font-weight: bolder;
+}
+
+/* Responsive Styling */
+@media (max-width: 576px) {
+    .outer-form {
+        padding: 1.5em;
+        margin: 1em;
+    }
+
+    .logout-form {
+        flex-direction: column;
+    }
+
+    .primaryAction,
+    .home-button {
+        margin-bottom: 10px; /* Add space between buttons */
+        font-size: 0.9em; /* Adjust font size for smaller screens */
+        padding: 0.5em 1em; /* Adjust padding */
+    }
+}
