@@ -8,18 +8,19 @@
 
 {% block content %}
 <div class="container my-5">
-    <div class="row">
+    <div class="row tab">
         <!-- Left Side -->
         <div class="col-md-6 mb-4">
             <div class="card p-4">
                 <h1 class="card-title">Profile of {{ user.username }}</h1>
-                <div class="profile-info mb-3">
+                <div class="profile-info mb-2">
+                    <p>DETAILS:</p>
                     <p>Email: <strong>{{ user.email }}</strong></p>
+                    <div><p>Change your password <a href="{% url 'password_change' %}">here</a></p></div>
                     <p>Phone Number: <strong>{{ profile.default_phone_number|default:"Not provided" }}</strong></p>
                 </div>
-
-                <h2>Update Phone Number</h2>
-                <form method="post" action="{% url 'update_phone_number' %}">
+                <p>If you would like to register or update you phone number, please do so below:</p>
+                <form method="post" action="{% url 'update_phone_number' %}" class="phone-form">
                     {% csrf_token %}
                     <div class="form-group">
                         {{ form.default_phone_number.label_tag }}
@@ -34,8 +35,8 @@
         <!-- Right Side -->
         <div class="col-md-6">
             <div class="card p-4">
-                <h2>Liked Properties</h2>
-                <ul class="list-group">
+                <h1>Liked Properties</h1>
+                <ul class="liked-properties list-group">
                     {% for property in liked_properties %}
                         <li class="list-group-item">{{ property.name }} - {{ property.location }}</li>
                     {% empty %}

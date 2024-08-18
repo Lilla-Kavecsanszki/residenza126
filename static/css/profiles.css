@@ -1,24 +1,28 @@
 body {
     font-family: "Cormorant Garamond", serif;
-    background-color: #051c2c;
-    color: whitesmoke;
+    background-color: #f4f4f4; /* Lighter background for better contrast */
+    color: #333; /* Darker text color for readability */
 }
 
+/* Container Styles */
 .container {
     padding: 2em;
-    margin-top: 12%
+}
+
+.tab {
+    margin-top: 14%;
 }
 
 /* Heading Styles */
-h1, h2 {
+h1, h2, h3 {
     text-align: center;
     font-family: "Italiana", sans-serif;
-    color: #fff;
+    color: #333; /* Darker color for headings */
     font-weight: 400;
 }
 
 h1 {
-    font-size: 2.5em; /* Larger font size for a bold presence */
+    font-size: 2.5em;
     margin-bottom: 0.5em;
 }
 
@@ -26,7 +30,7 @@ h2 {
     font-size: 2em;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
-    color: #555;
+    color: #007bff; /* Matching color for a consistent theme */
 }
 
 /* Profile Info */
@@ -45,7 +49,7 @@ h2 {
     padding: 1em;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #fafafa;
+    background-color: #fff; /* White background for the form */
 }
 
 .phone-form .form-group {
@@ -88,7 +92,7 @@ h2 {
 }
 
 .liked-properties li {
-    background-color: #f9f9f9;
+    background-color: #fff; /* White background for list items */
     border: 1px solid #ddd;
     padding: 1em;
     border-radius: 4px;
@@ -98,10 +102,6 @@ h2 {
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        padding: 1em;
-    }
-
-    .container.profile-container {
         padding: 1em;
     }
 
