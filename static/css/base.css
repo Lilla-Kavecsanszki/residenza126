@@ -91,9 +91,15 @@ header {
     font-size: large;
 }
 
+/* Icon styles */
 .icon {
     display: inline-block;
     color: #051c2c;
+}
+
+.icon:hover {
+    color: #fefefe;
+    
 }
 
 @media (max-width: 992px) {

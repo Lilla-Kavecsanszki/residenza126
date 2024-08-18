@@ -1,0 +1,138 @@
+/* Base Styles */
+body {
+    font-family: "Cormorant Garamond", serif;
+    background-color: #051c2c;
+    color: whitesmoke;
+    padding-top: 60px; /* Adjust based on your header height */
+}
+
+/* Container for the Property Management Page */
+.container {
+    padding: 2em;
+    margin-top: 10%;
+    max-width: 1200px;
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(5, 28, 44, 0.1);
+}
+
+h1 {
+    color: #051c2c;
+    font-family: "Cinzel", serif;
+    font-weight: 700;
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+
+/* Form Styles */
+form {
+    max-width: 800px; /* Limiting the form width */
+    margin: 0 auto; /* Centering the form */
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+    background-color: #f9f9f9;
+}
+
+legend {
+    font-weight: bold;
+    color: #051c2c;
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 1.5em;
+}
+
+/* Form Field Styles */
+.form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: #051c2c;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid #ddd; /* Light border color */
+    border-radius: 5px; /* Rounded corners for fields */
+    box-sizing: border-box; /* Ensures padding is included in the total width/height */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+.form-group input[type="file"] {
+    border: 1px solid #ddd; /* Border for file inputs */
+    border-radius: 5px; /* Rounded corners for file inputs */
+    padding: 0.75em; /* Padding for better appearance */
+}
+
+/* Hover and Focus States */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #051c2c; /* Dark blue border on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Button Styling */
+button.btn-primary {
+    background-color: #051c2c;
+    color: white;
+    border: none;
+    padding: 0.75em 1.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background-color: #033c5c; /* Darker shade on hover */
+}
+
+/* Alert Messages */
+
+.alert-container {
+    margin-bottom: 1em;
+}
+
+.alert {
+    padding: 1em;
+    border-radius: 0.25em;
+    margin-bottom: 1em;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1em;
+    }
+    
+    form {
+        padding: 1em;
+    }
+    
+    .form-group {
+        margin-bottom: 1em;
+    }
+}

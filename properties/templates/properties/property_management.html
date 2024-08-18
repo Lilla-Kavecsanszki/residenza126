@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Extra CSS -->
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/property_management.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Property Management</h1>
+
+    <!-- Display success or error messages -->
+    {% if messages %}
+        <div class="alert-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ property_form.as_p }}
+
+        <fieldset>
+            <legend>Property Images</legend>
+            {{ image_forms.management_form }}
+            {% for form in image_forms %}
+                <div class="form-group">
+                    {{ form.image.label_tag }}
+                    {{ form.image }}
+                    {{ form.non_field_errors }}
+                </div>
+            {% endfor %}
+        </fieldset>
+
+        <fieldset>
+            <legend>Property Videos</legend>
+            {{ video_forms.management_form }}
+            {% for form in video_forms %}
+                <div class="form-group">
+                    {{ form.video.label_tag }}
+                    {{ form.video }}
+                    {{ form.non_field_errors }}
+                </div>
+            {% endfor %}
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary">Save Property</button>
+    </form>
+</div>
+{% endblock %}

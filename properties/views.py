@@ -5,8 +5,11 @@ from django.db.models.functions import Lower
 from django.views import View
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Property
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Property, PropertyImage, PropertyVideo
 from profiles.models import UserProfile
+from .forms import PropertyForm, PropertyImageFormSet, PropertyVideoFormSet
+
 
 @login_required
 def like_property(request, property_id):
@@ -28,26 +31,21 @@ def like_property(request, property_id):
             user_profile.liked_properties.add(property)
 
         # Redirect back to the referring page or home if not available
-        return redirect(request.META.get('HTTP_REFERER', reverse('home')))  # Redirect to referring page or home if not available
+        return redirect(request.META.get('HTTP_REFERER', reverse('home')))
     else:
         # If not POST, just redirect to home or handle error
         return redirect(reverse('home'))
 
 
-class AllProperties(View):
+class AllProperties(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        """A view to show all properties, including sorting and search queries"""
+        """A view to show all properties, including sorting and search queries."""
         properties = Property.objects.all()
         query = request.GET.get('q', '')
         locations = request.GET.getlist('location')
         property_types = request.GET.getlist('type')
         sort = request.GET.get('sort', 'created_at')  # Default sorting field
         direction = request.GET.get('direction', 'asc')  # Default sorting direction
-
-        # Debug: Print the filtering parameters
-        print(f"Query: {query}")
-        print(f"Locations: {locations}")
-        print(f"Property Types: {property_types}")
 
         # Handle sorting
         valid_sort_keys = ['name', 'location', 'property_type', 'size', 'price', 'created_at']
@@ -102,9 +100,9 @@ class AllProperties(View):
         return render(request, 'properties/properties.html', context)
 
 
-class PropertyDetail(View):
+class PropertyDetail(LoginRequiredMixin, View):
     def get(self, request, property_id, *args, **kwargs):
-        """A view to show individual property details"""
+        """A view to show individual property details."""
         property = get_object_or_404(Property, pk=property_id)
         liked = request.user.is_authenticated and property.liked_by.filter(id=request.user.id).exists()
 
@@ -117,6 +115,30 @@ class PropertyDetail(View):
         return render(request, 'properties/property_details.html', context)
 
 
+@login_required
+def property_management(request):
+    if request.method == 'POST':
+        property_form = PropertyForm(request.POST, request.FILES)
+        image_formset = PropertyImageFormSet(request.POST, request.FILES)
+        video_formset = PropertyVideoFormSet(request.POST, request.FILES)
 
+        if property_form.is_valid() and image_formset.is_valid() and video_formset.is_valid():
+            property = property_form.save()
+            image_formset.instance = property
+            video_formset.instance = property
+            image_formset.save()
+            video_formset.save()
+            messages.success(request, 'Property has been successfully saved!')
+            return redirect('all_properties')  # Ensure this matches the URL pattern name
+        else:
+            messages.error(request, 'There was an error saving the property. Please check the form for errors.')
+    else:
+        property_form = PropertyForm()
+        image_formset = PropertyImageFormSet()
+        video_formset = PropertyVideoFormSet()
 
-
+    return render(request, 'properties/property_management.html', {
+        'property_form': property_form,
+        'image_forms': image_formset,
+        'video_forms': video_formset
+    })
