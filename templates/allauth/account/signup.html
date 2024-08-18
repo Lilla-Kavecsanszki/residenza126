@@ -35,10 +35,12 @@
     value="{{ redirect_field_value }}"
   />
   {% endif %}
-  <a class="btn btn-outline-black rounded-0" href="{% url 'account_login' %}"
+  <div class="forgot-password-wrapper">
+  <a class="secondaryAction forgot-password" href="{% url 'account_login' %}"
     >Back to Login</a
   >
-  <button type="submit">{% trans "Sign Up" %}</button>
+</div>
+  <button class="primaryAction" type="submit">{% trans "Sign Up" %}</button>
 </form>
 </div>
 </div>

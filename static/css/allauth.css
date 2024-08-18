@@ -71,7 +71,7 @@ body {
     margin-bottom: 1.5em;
 }
 
-.form .form-control {
+.form-control {
     border-radius: 2px;
     border: 1px solid #ddd;
     padding: 0.75em;
@@ -80,7 +80,7 @@ body {
     color: #051c2c; 
 }
 
-.form .form-control:focus {
+.form-control:focus {
     border-color: #fff;
     box-shadow: 0 0 0 3px rgba(221, 221, 221, 0.5);
 }
@@ -118,7 +118,7 @@ body {
 }
 
 /* Form Actions */
-.form .primaryAction {
+.primaryAction {
     background-color: #051c2c;
     color: white;
     border: 3px solid white;
@@ -128,15 +128,18 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-align: center; /* Center the text */
+    width: 100%; /* Make the link take the full width of its container */
+    max-width: 300px; /* Add a maximum width to control its size */
 }
 
-.form .primaryAction:hover {
+.primaryAction:hover {
     background-color: white;
     color: #051c2c;
     font-weight: bolder;
 }
 
-.form .secondaryAction {
+.secondaryAction {
     background-color: transparent;
     color: white;
     border: 1px solid white;
@@ -147,14 +150,13 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.form .secondaryAction:hover {
+.secondaryAction:hover {
     background-color: #051c2c;
     color: #fff;
 }
 
 .forgot-password-wrapper {
     display: flex;
-    justify-content: center; /* Center the button horizontally */
     margin-top: 1em; /* Add space between the Sign In button and Forgot Password link */
 }
 
@@ -293,19 +295,15 @@ body {
 
 .outer-form {
     background-color: #051c2c;
-    margin-bottom: 3%;
-    margin-top: 1%;
-    margin-left: 2%;
-    margin-right: 2%;
+    margin: 1em auto;
     border-radius: 3px;
 }
 
 #signup_form {
     background-color: #051c2c;
     padding: 2em;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Adjusted shadow for visibility */
-    border-radius: 5px; /* Rounded corners for better aesthetics */
-    margin: 1em auto; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+    border-radius: 5px; 
     max-width: 600px;
     color: #fff;
     font-size: 1.1em;
