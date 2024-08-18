@@ -1,17 +1,29 @@
-{% extends "account/base.html" %} {% load i18n %} {% block head_title %}
+{% extends "account/base.html" %}
+{% load i18n crispy_forms_tags %}
+{% load account socialaccount %}
+{% load static %}
+
+<!-- Extra CSS -->
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/allauth.css' %}" />
+{% endblock %} 
+
+{% block head_title %}
 <!-- trans signup -->
 {% trans "Signup" %}{% endblock %} {% block inner_content %}
-<hr />
-<h2 class="logo-font mt-5 mb-4">{% trans "Sign Up" %}</h2>
+
+<div class="container-fluid">
+<h2 class="logo-font title mb-4">{% trans "Sign Up" %}</h2>
 <hr />
 
-<p>
+<p class="please">
   {% blocktrans %}Already have an account? Then please
   <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
 </p>
 
+<div class="mb-5 outer-form">
 <form
-  class="signup mb-5"
+  class="signup mb-2"
   id="signup_form"
   method="post"
   action="{% url 'account_signup' %}"
@@ -28,5 +40,6 @@
   >
   <button type="submit">{% trans "Sign Up" %}</button>
 </form>
-
+</div>
+</div>
 {% endblock %}

@@ -16,6 +16,10 @@ body {
     width: 100%;
 }
 
+.title {
+    margin-top: 11%;
+}
+
 /* Flexbox Columns */
 .left-content, .right-content {
     display: flex;
@@ -38,12 +42,13 @@ body {
     font-weight: 600;
 }
 
-.signup {
+.signin {
+    
     text-decoration: underline;
     transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for both zoom and color changes */
 }
 
-.signup:hover {
+.signin:hover {
     transform: scale(1.1); /* Slightly increase size on hover */
 }
 
@@ -147,6 +152,40 @@ body {
     color: #fff;
 }
 
+.forgot-password-wrapper {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    margin-top: 1em; /* Add space between the Sign In button and Forgot Password link */
+}
+
+.forgot-password {
+    display: inline-block;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 0.75em 1.5em;
+    font-size: 0.8em;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center; /* Center the text */
+    width: 100%; /* Make the link take the full width of its container */
+    max-width: 300px; /* Add a maximum width to control its size */
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Adjust the width and padding for smaller screens */
+@media (max-width: 576px) {
+    .forgot-password {
+        padding: 0.5em 1em; /* Adjust padding for smaller screens */
+        font-size: 0.9em; /* Slightly smaller font size */
+    }
+}
+
+
 /* Social Account Buttons */
 .socialaccount_providers {
     list-style: none;
@@ -247,4 +286,30 @@ body {
     .socialaccount_providers li {
         margin: 0.5em 0;
     }
+}
+
+
+/* Sign Up page */
+
+.outer-form {
+    background-color: #051c2c;
+    margin-bottom: 3%;
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 3px;
+}
+
+#signup_form {
+    background-color: #051c2c;
+    padding: 2em;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Adjusted shadow for visibility */
+    border-radius: 5px; /* Rounded corners for better aesthetics */
+    margin: 1em auto; 
+    max-width: 600px;
+    color: #fff;
+    font-size: 1.1em;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between form elements */
 }
