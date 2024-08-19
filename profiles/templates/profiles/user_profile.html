@@ -8,43 +8,134 @@
 
 {% block content %}
 <div class="container my-5">
-    <div class="row tab">
-        <!-- Left Side -->
-        <div class="col-md-6 mb-4">
-            <div class="card p-4">
-                <h1 class="card-title">Profile of {{ user.username }}</h1>
-                <div class="profile-info mb-2">
-                    <p>DETAILS:</p>
-                    <p>Email: <strong>{{ user.email }}</strong></p>
-                    <div><p>Change your password <a href="{% url 'password_change' %}">here</a></p></div>
-                    <p>Phone Number: <strong>{{ profile.default_phone_number|default:"Not provided" }}</strong></p>
-                </div>
-                <p>If you would like to register or update you phone number, please do so below:</p>
-                <form method="post" action="{% url 'update_phone_number' %}" class="phone-form">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        {{ form.default_phone_number.label_tag }}
-                        {{ form.default_phone_number }}
-                        {{ form.default_phone_number.errors }}
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Right Side -->
-        <div class="col-md-6">
-            <div class="card p-4">
-                <h1>Liked Properties</h1>
-                <ul class="liked-properties list-group">
-                    {% for property in liked_properties %}
-                        <li class="list-group-item">{{ property.name }} - {{ property.location }}</li>
-                    {% empty %}
-                        <li class="list-group-item">No liked properties.</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
+    <div class="mb-5 tab">
+                            <div class="main-card mirror-silver-background p-3">
+                                <h2 class="card-title text-center">Profile of {{ user.username }}</h2>
+                                <div class="profile-info">
+                                    <p class="larger font-weight-bold">Details:</p>
+                                    <p class="larger">First Name: <strong>{{ user.first_name }}</strong></p>
+                                    <p class="larger">Last Name: <strong>{{ user.last_name }}</strong></p>
+                                    <p class="larger">Email: <strong>{{ user.email }}</strong></p>
+                                    <p class="small">Change your password <a href="{% url 'password_change' %}">here</a></p>
+                                    <p class="larger">Phone Number: <strong>{{ profile.default_phone_number|default:"Not provided" }}</strong></p>
+                                </div>
+                                <p class="small">If you would like to register or update your details, please do so below:</p>
+                                <form method="post" action="{% url 'update_user_profile' %}" class="mirror-silver-background user-profile-form">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        {{ form.first_name.label_tag }}
+                                        {{ form.first_name }}
+                                        {{ form.first_name.errors }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.last_name.label_tag }}
+                                        {{ form.last_name }}
+                                        {{ form.last_name.errors }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.default_phone_number.label_tag }}
+                                        {{ form.default_phone_number }}
+                                        {{ form.default_phone_number.errors }}
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </form>
+                                
+                            </div>
     </div>
+    <div>
+        <div class="main-card mirror-silver-background p-3">
+            <h2 class="text-center">My Favourites <i class="fas fa-star fa-star-base light-base"></i></h2>
+            <div class="row">
+                {% for property in liked_properties %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 border-0 property-card">
+                            {% if property.main_video %}
+                                <!-- Render video if available -->
+                                <a href="{% url 'property_detail' property.id %}">
+                                    <video class="card-img-top img-fluid" autoplay muted loop>
+                                        <source src="{{ property.main_video.url }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </a>
+                            {% elif property.main_image %}
+                                <!-- Render image if video is not available -->
+                                <a href="{% url 'property_detail' property.id %}">
+                                    <img class="card-img-top img-fluid" src="{{ property.main_image.url }}" alt="{{ property.name }}">
+                                </a>
+                            {% else %}
+                                <!-- Fallback image if neither video nor image is available -->
+                                <a href="{% url 'property_detail' property.id %}">
+                                    <img class="card-img-top img-fluid" src="{% static 'media/noimage.png' %}" alt="{{ property.name }}">
+                                </a>
+                            {% endif %}
+                            <div class="card-body pb-0">
+                                <p class="mb-0 d-flex justify-content-between price align-items-baseline">
+                                    {{ property.name }}
+                                    <span class="price">€{{ property.price }}</span>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-white pt-0 border-0 text-left">
+                                <div class="row">
+                                    <div class="col-6">
+                                        {% if property.size %}
+                                            <p class="mb-0">
+                                                <i class="fas fa-ruler mr-1"></i>{{ property.size }} sq ft
+                                            </p>
+                                        {% endif %}
+                                        {% if property.location %}
+                                            <p class="mb-0">
+                                                <i class="fas fa-map-marker-alt mr-1"></i>{{ property.location }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-6">
+                                        {% if property.bedrooms %}
+                                            <p class="mb-0">
+                                                <i class="fas fa-bed mr-1"></i>{{ property.bedrooms }} Bedrooms
+                                            </p>
+                                        {% endif %}
+                                        {% if property.bathrooms %}
+                                            <p class="mb-0">
+                                                <i class="fas fa-bath mr-1"></i>{{ property.bathrooms }} Bathrooms
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Like Button -->
+                            <div class="like-container">
+                                {% if user.is_authenticated %}
+                                    <form action="{% url 'like_property' property.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-link" style="border: none; background: none; padding: 0;">
+                                            <i class="fa-star like {% if user in property.liked_by.all %}fas light-base{% else %}far{% endif %}" id="like-icon-{{ property.id }}"></i>
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <i class="far fa-star like" id="like-icon-{{ property.id }}" onclick="showLoginPrompt()"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-12">
+                        <div class="card h-100">
+                            <div class="card-body d-flex align-items-center">
+                                <!-- Text and button aligned in a row -->
+                                <div class="row w-100">
+                                    <div class="col-md-6 text-center">
+                                        <p class="card-text not-yet mb-0">No liked properties yet.</p>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <a href="{% url 'all_properties' %}" class="btn btn-primary">View Properties</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>    
 </div>
 {% endblock %}
