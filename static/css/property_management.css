@@ -1,8 +1,8 @@
 /* Base Styles */
 body {
     font-family: "Cormorant Garamond", serif;
-    background-color: #051c2c;
-    color: whitesmoke;
+    background-color: #fff;
+    color: #051c2c;;
     padding-top: 60px; /* Adjust based on your header height */
 }
 
@@ -10,11 +10,26 @@ body {
 .container {
     padding: 2em;
     margin-top: 10%;
+    margin-bottom: 2%;
     max-width: 1200px;
-    background-color: #ffffff;
-    color: #333;
-    border-radius: 8px;
-    box-shadow: 0 6px 12px rgba(5, 28, 44, 0.1);
+    color: #051c2c;
+    border-radius: 3px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 1);
+}
+
+.mirror-silver-background {
+    background: linear-gradient(135deg, #f2f2f2, #d9d9d9, #e6e6e6, #bfbfbf, #f2f2f2);
+    color: #333; /* Text color for contrast */
+    padding: 1em;
+    background-size: 400% 400%; /* Enhance gradient movement */
+    animation: shiny-effect 5s ease-in-out infinite;
+}
+
+/* Animation to create a moving shine effect */
+@keyframes shiny-effect {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 h1 {
@@ -32,11 +47,10 @@ form {
 }
 
 fieldset {
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: none;
     padding: 1.5em;
     margin-bottom: 1.5em;
-    background-color: #f9f9f9;
+    background-color: transparent;
 }
 
 legend {
@@ -87,7 +101,7 @@ button.btn-primary {
     color: white;
     border: none;
     padding: 0.75em 1.5em;
-    border-radius: 5px;
+    border-radius: 1px;
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
