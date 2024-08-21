@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Property, PropertyImage, PropertyVideo
 from profiles.models import UserProfile
 from .forms import PropertyForm, PropertyImageFormSet, PropertyVideoFormSet
-
+from django.forms import modelformset_factory
 
 @login_required
 def like_property(request, property_id):
@@ -132,6 +132,16 @@ def property_management(request):
             return redirect('all_properties')  # Ensure this matches the URL pattern name
         else:
             messages.error(request, 'There was an error saving the property. Please check the form for errors.')
+
+            # Prepare context with errors
+            context = {
+                'property_form': property_form,
+                'image_forms': image_formset,
+                'video_forms': video_formset,
+                'image_form_errors': image_formset.errors,
+                'video_form_errors': video_formset.errors,
+            }
+            return render(request, 'properties/property_management.html', context)
     else:
         property_form = PropertyForm()
         image_formset = PropertyImageFormSet()
@@ -140,5 +150,5 @@ def property_management(request):
     return render(request, 'properties/property_management.html', {
         'property_form': property_form,
         'image_forms': image_formset,
-        'video_forms': video_formset
+        'video_forms': video_formset,
     })

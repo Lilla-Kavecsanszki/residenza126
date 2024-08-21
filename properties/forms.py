@@ -50,7 +50,7 @@ PropertyImageFormSet = inlineformset_factory(
     form=PropertyImageForm,
     extra=5,  # Adjust the number of extra forms as needed
     can_delete=True,
-    min_num=1,  # Enforce at least one image form
+    min_num=0,  # Enforce at least one image form
     validate_min=True
 )
 
@@ -60,6 +60,6 @@ PropertyVideoFormSet = inlineformset_factory(
     form=PropertyVideoForm,
     extra=5,  # Adjust the number of extra forms as needed
     can_delete=True,
-    min_num=1,  # Enforce at least one video form
+    min_num=0,  # Enforce at least one video form
     validate_min=True
 )

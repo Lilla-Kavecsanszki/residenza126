@@ -49,7 +49,7 @@ form {
 fieldset {
     border: none;
     padding: 1.5em;
-    margin-bottom: 1.5em;
+    margin-bottom: 0.5em;
     background-color: transparent;
 }
 
@@ -75,14 +75,14 @@ legend {
 .form-group textarea {
     width: 100%;
     padding: 0.75em;
-    border: 1px solid #ddd; /* Light border color */
+    border: 1px solid #051c2c; 
     border-radius: 5px; /* Rounded corners for fields */
     box-sizing: border-box; /* Ensures padding is included in the total width/height */
     transition: border-color 0.3s ease; /* Smooth transition for border color */
 }
 
 .form-group input[type="file"] {
-    border: 1px solid #ddd; /* Border for file inputs */
+    border: 1px solid #051c2c; /* Border for file inputs */
     border-radius: 5px; /* Rounded corners for file inputs */
     padding: 0.75em; /* Padding for better appearance */
 }
@@ -99,17 +99,46 @@ legend {
 button.btn-primary {
     background-color: #051c2c;
     color: white;
-    border: none;
+    border: 3px solid transparent; /* Start with a transparent border */
     padding: 0.75em 1.5em;
     border-radius: 1px;
     cursor: pointer;
     font-size: 1em;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease; /* Added border transition */
 }
 
+/* Hover state with animated border */
 button.btn-primary:hover {
-    background-color: #033c5c; /* Darker shade on hover */
+    background-color: white;
+    border: 3px solid #051c2c; /* Border color changes on hover */
+    color: #051c2c;
 }
+
+/* Target <p> tags within the first fieldset */
+form fieldset:first-of-type p {
+    margin-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+form fieldset:first-of-type p label {
+    margin-bottom: 0.5em;
+    color: #051c2c;
+    font-weight: bolder;
+}
+
+form fieldset:first-of-type p input,
+form fieldset:first-of-type p select,
+form fieldset:first-of-type p textarea {
+    width: 100%;
+    height: auto;
+    padding: 0.75em;
+    border: 1px solid #051c2c;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
 
 /* Alert Messages */
 

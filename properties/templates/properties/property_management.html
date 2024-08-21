@@ -23,7 +23,17 @@
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ property_form.as_p }}
+        <fieldset>
+            <legend>Property Details</legend>
+            {{ property_form.as_p }}
+            {% for field in property_form %}
+                {% if field.errors %}
+                    <div class="text-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </fieldset>
 
         <fieldset>
             <legend>Property Images</legend>
@@ -32,7 +42,11 @@
                 <div class="form-group">
                     {{ form.image.label_tag }}
                     {{ form.image }}
-                    {{ form.non_field_errors }}
+                    {% if form.errors %}
+                        <div class="text-danger">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </fieldset>
@@ -44,7 +58,11 @@
                 <div class="form-group">
                     {{ form.video.label_tag }}
                     {{ form.video }}
-                    {{ form.non_field_errors }}
+                    {% if form.errors %}
+                        <div class="text-danger">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </fieldset>
