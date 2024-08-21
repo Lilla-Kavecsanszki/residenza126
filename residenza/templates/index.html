@@ -2,6 +2,11 @@
 {% load i18n %}
 {% load static %}
 
+<!-- Extra CSS -->
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+{% endblock %}
+
 {% block title %}{% trans "Homepage" %}{% endblock %}
 
 {% block content %}
@@ -25,17 +30,46 @@
             <div class="frame_items">
                 {% for property in property_list %}
                 <div class="property">
-                    <img src="{{ property.image_url }}" alt="{{ property.name }}" class="img-fluid">
-                    <div class="property-details bg-light p-3">
-                        <h3 class="text-center">{{ property.name }}</h3>
-                        <p class="text-center">{{ property.description }}</p>
+                    <!-- Media Container -->
+                    <div class="property-media">
+                        <!-- Check if a main video exists -->
+                        {% if property.main_video %}
+                            <video class="img-fluid" autoplay muted loop>
+                                <source src="{{ property.main_video.url }}" type="video/mp4">
+                                {% trans "Your browser does not support the video tag." %}
+                            </video>
+                        <!-- Check if a main image exists -->
+                        {% elif property.main_image %}
+                            <img src="{{ property.main_image.url }}" alt="{{ property.name }}" class="img-fluid">
+                        <!-- Fallback image or placeholder -->
+                        {% else %}
+                            <img src="{% static 'media/noimage.png' %}" alt="{% trans 'Placeholder' %}" class="img-fluid">
+                        {% endif %}
                     </div>
+                    
+                    <!-- Property Details -->
+                    <div class="property-details p-3">
+                        <h3 class="text-center">{{ property.name }}</h3>
+                    </div>
+                </div>
+                
+                {% empty %}
+                <!-- Optional: Display a message if no properties are available -->
+                <div>
+                    <p class="text-center">{% trans "No properties available at the moment." %}</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
     </div>
+
+    <!-- Button to navigate to all properties page -->
+    <div class="text-center mt-4">
+        <a href="{% url 'all_properties' %}" class="glass-button">{% trans "View All Properties" %}</a>
+    </div>
 </section>
+
+
 
 <!-- About Section -->
 <section id="about" class="about py-5">

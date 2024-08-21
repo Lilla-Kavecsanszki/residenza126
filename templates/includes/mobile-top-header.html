@@ -14,17 +14,17 @@
         </a>
         <div class="dropdown-menu dropdown-menu-center border-0" aria-labelledby="user-options-mobile">
             {% if request.user.is_authenticated %}
-            {% if request.user.is_superuser %}
-            <a href="#" class="dropdown-item">{% trans "Property Management" %}</a>
-            {% endif %}
-            <a href="{% url 'user_profile' %}" class="dropdown-item">
-                {% trans 'My Favourites' %} 
-                <i class="fas fa-star light"></i>
-            </a>
-            <a href="{% url 'account_logout' %}" class="dropdown-item">{% trans "Logout" %}</a>
+                {% if request.user.is_superuser %}
+                <a href="{% url 'property_management' %}" class="dropdown-item">{% trans "Property Management" %}</a>
+                {% endif %}
+                <a href="{% url 'user_profile' %}" class="dropdown-item">
+                    {% trans 'My Favourites' %} 
+                    <i class="fas fa-star light"></i>
+                </a>
+                <a href="{% url 'account_logout' %}" class="dropdown-item">{% trans "Logout" %}</a>
             {% else %}
-            <a href="{% url 'account_signup' %}" class="dropdown-item">{% trans "Register" %}</a>
-            <a href="{% url 'account_login' %}" class="dropdown-item">{% trans "Login" %}</a>
+                <a href="{% url 'account_signup' %}" class="dropdown-item">{% trans "Register" %}</a>
+                <a href="{% url 'account_login' %}" class="dropdown-item">{% trans "Login" %}</a>
             {% endif %}
         </div>
     </li>

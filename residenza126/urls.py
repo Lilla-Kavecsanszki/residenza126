@@ -7,12 +7,12 @@ from .views import language_switch, handler404
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path('properties/', include('properties.urls')),
-    path('construction/', include('construction.urls')),
-    path('profiles/', include('profiles.urls')),
-    path('contact/', include('contact.urls')),
-    path('language/<str:lang_code>/', language_switch, name='language_switch'),
+    path('accounts/', include('allauth.urls')),  # Authentication URLs
+    path('properties/', include('properties.urls')),  # Properties app URLs
+    path('construction/', include('construction.urls')),  # Construction app URLs
+    path('profiles/', include('profiles.urls')),  # Profiles app URLs
+    path('contact/', include('contact.urls')),  # Contact app URLs
+    path('language/<str:lang_code>/', language_switch, name='language_switch'),  # Language switch URL
 ]
 
 # Adding i18n_patterns to handle language prefixes

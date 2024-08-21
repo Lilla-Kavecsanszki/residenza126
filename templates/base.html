@@ -1,7 +1,7 @@
 {% load static i18n %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{% get_current_language as LANGUAGE_CODE %}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,23 +73,21 @@
                             </a>
                             
                             <div class="dropdown-menu border-0" aria-labelledby="user-options">
-    {% if request.user.is_authenticated %}
-        <!-- superuser -->
-        {% if request.user.is_superuser %}
-        <a href="{% url 'property_management' %}" class="dropdown-item">{% trans 'Property Management' %}</a>
-        {% endif %}
-        <a href="{% url 'user_profile' %}" class="dropdown-item">
-            {% trans 'My Favourites' %} 
-            <i class="fas fa-star fa-star-base light-base"></i>
-        </a>
-        <a href="{% url 'account_logout' %}" class="dropdown-item">{% trans 'Logout' %}</a>
-    {% else %}
-        <a href="{% url 'account_signup' %}" class="dropdown-item">{% trans 'Register' %}</a>
-        <a href="{% url 'account_login' %}" class="dropdown-item">{% trans 'Login' %}</a>
-    {% endif %}
-</div>
-
-                            
+                                {% if request.user.is_authenticated %}
+                                    <!-- superuser -->
+                                    {% if request.user.is_superuser %}
+                                    <a href="{% url 'property_management' %}" class="dropdown-item">{% trans 'Property Management' %}</a>
+                                    {% endif %}
+                                    <a href="{% url 'user_profile' %}" class="dropdown-item">
+                                        {% trans 'My Favourites' %} 
+                                        <i class="fas fa-star fa-star-base light-base"></i>
+                                    </a>
+                                    <a href="{% url 'account_logout' %}" class="dropdown-item">{% trans 'Logout' %}</a>
+                                {% else %}
+                                    <a href="{% url 'account_signup' %}" class="dropdown-item">{% trans 'Register' %}</a>
+                                    <a href="{% url 'account_login' %}" class="dropdown-item">{% trans 'Login' %}</a>
+                                {% endif %}
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -100,12 +98,13 @@
                             <a class="text-black nav-link dropdown-toggle" href="#" id="language-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="text-center icon">
                                     <i class="fas fa-globe fa-lg"></i>
-                                    <p class="my-0">{% trans 'EN' %}</p> <!-- Shows current language -->
+                                    <p class="my-0">{% trans "EN" %}</p> <!-- Shows current language -->
                                 </div>
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="language-options">
-                                <a href="{% url 'language_switch' 'en' %}" class="dropdown-item">{% trans 'EN' %}</a>
-                                <a href="{% url 'language_switch' 'it' %}" class="dropdown-item">{% trans 'IT' %}</a>
+                                <a href="{% url 'language_switch' 'en' %}" class="dropdown-item {% if LANGUAGE_CODE == 'en' %}active{% endif %}">{% trans 'EN' %}</a>
+                                <a href="{% url 'language_switch' 'it' %}" class="dropdown-item {% if LANGUAGE_CODE == 'it' %}active{% endif %}">{% trans 'IT' %}</a>
+
                             </div>
                         </li>
                     </ul>
@@ -132,7 +131,7 @@
                     <div class="dropdown-menu dropdown-menu-center border-0" aria-labelledby="user-options-mobile">
                         {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser %}
-                        <a href="#" class="dropdown-item">{% trans 'Property Management' %}</a>
+                        <a href="{% url 'property_management' %}" class="dropdown-item">{% trans 'Property Management' %}</a>
                         {% endif %}
                         <a href="{% url 'user_profile' %}" class="dropdown-item">
                             {% trans 'My Favourites' %} 
@@ -155,7 +154,7 @@
                         </div>
                     </a>
                     <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
-                        <form class="form" method="GET" action="#">
+                        <form class="form" method="GET" action="{% url 'all_properties' %}">
                             <div class="input-group w-100">
                                 <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="{% trans 'Search our site' %}" />
                                 <div class="input-group-append">
@@ -179,8 +178,9 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-center border-0" aria-labelledby="mobile-language">
-                        <a href="{% url 'language_switch' 'en' %}" class="dropdown-item">{% trans 'EN' %}</a>
-                        <a href="{% url 'language_switch' 'it' %}" class="dropdown-item">{% trans 'IT' %}</a>
+                        <a href="{% url 'language_switch' 'en' %}" class="dropdown-item {% if LANGUAGE_CODE == 'en' %}active{% endif %}">{% trans 'EN' %}</a>
+                        <a href="{% url 'language_switch' 'it' %}" class="dropdown-item {% if LANGUAGE_CODE == 'it' %}active{% endif %}">{% trans 'IT' %}</a>
+
                     </div>
                 </li>
             </ul>

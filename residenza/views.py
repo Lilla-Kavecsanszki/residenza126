@@ -10,3 +10,8 @@ def homepage(request):
     }
 
     return render(request, 'index.html', context)
+
+
+def property_list_view(request):
+    properties = Property.objects.all()  # Fetch all properties
+    return render(request, 'your_template.html', {'property_list': properties})
