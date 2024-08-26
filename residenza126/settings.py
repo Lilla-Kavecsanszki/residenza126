@@ -1,18 +1,15 @@
 import os
 from pathlib import Path
-import environ
-import cloudinary
-import cloudinary_storage
 import dj_database_url
 from django.contrib.messages import constants as messages
 
-# Initialize environment variables
-env = environ.Env()
-environ.Env.read_env()  
+
+if os.path.isfile("env.py"):
+    import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATES_DIR = BASE_DIR / 'templates'
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -29,13 +26,6 @@ DATABASES = {
 # ALLOWED_HOSTS
 ALLOWED_HOSTS = ['127.0.0.1', 'residenza126.herokuapp.com', 'localhost']
 
-# Cloudinary Configuration
-cloudinary.config(
-    cloudinary_url=os.environ.get('CLOUDINARY_URL')
-)
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 # Application definition
 INSTALLED_APPS = [
@@ -115,6 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = env('TIME_ZONE', default='Europe/Rome')
 
+
 USE_I18N = True
 USE_TZ = True
 
@@ -129,10 +120,14 @@ LOCALE_PATHS = [
 ]
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = \
+    'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
