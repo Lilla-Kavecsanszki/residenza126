@@ -1,4 +1,4 @@
-#!/Users/lilla/Desktop/Residenza126/residenza126/.venv/bin/python
+#!/Users/lilla/Desktop/Residenza126/residenza126/.venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys
